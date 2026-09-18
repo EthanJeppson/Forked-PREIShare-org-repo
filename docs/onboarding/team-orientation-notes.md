@@ -11,40 +11,40 @@ Date: 2026-09-18
 
 ## 1. Product mission (my words)
 
-Handoff means giving someone my work so they can continue. After the handoff,
-the other person should be able to open a matching copy and keep going. They
-should not have to rebuild any part that was already finished.
+PREIshare is a real-estate intelligence product. It takes property facts and
+market data and turns them into a picture a person can use when they have to
+choose what to do next with a building, a neighborhood, or a deal.
 
-PREIshare is that handoff when it is a built-in shortcut inside the tool—not
-a zip I packed, not rebuild instructions, and not a view-only link. It is like
-the Share button in a school slideshow app: it delivers project files or
-settings the recipient can open and edit as their own copy. A screenshot of
-settings, or a link that only lets someone look, is not PREIshare.
+Property data is the close-up: what a place costs, how it is performing, what
+condition it is in, and what is happening on that site. Market data is the
+wider view: how similar properties are doing, which areas are heating up or
+cooling off, and what buyers, sellers, and operators are seeing right now.
+Intelligence is the step after collecting those numbers. Raw spreadsheets
+are not the product. The product is a clearer story that helps someone make
+a better real-estate decision with less guesswork.
+
+The decision can be small or large—buy, hold, sell, skip, or look in a
+different market—but it has to be a real choice, not just more charts. If
+the data does not help a human decide, it is not doing the PREIshare job.
 
 The three checks I will use before I call something PREIshare:
 
-1. **Ready copy.** The other person gets files or settings they can open and
-   use right away—not a description they have to recreate.
-2. **Built-in shortcut.** The copy comes from a button, link, or labeled step
-   already in the tool or course—not a package I built by hand.
-3. **No rebuild-from-scratch.** They do not start from a blank project and
-   reconstruct every piece.
+1. **Property and market inputs.** It starts from real-estate facts, not from
+   a blank guess or a slogan.
+2. **Turned into a usable picture.** A person can read the result and tell
+   what the data is saying about a property or a market.
+3. **Supports a better decision.** The output helps someone choose a next
+   step, instead of leaving them to reconstruct the meaning by hand.
 
-A settings-only PREIshare still counts if it hands off settings as a ready
-copy through a built-in action. It is narrower, not a different idea.
-
-This team cares about that standard because a teammate who continues tonight
-needs a usable copy, not a backpack of loose pages. My job as a new
-contributor is to join that handoff loop safely—not to rewrite the shared
-project on day one.
+This team is building that intelligence loop. My job as a new contributor is
+to join the product work safely—not to rewrite the shared project on day one.
 
 ## 2. Everyday collaboration → engineering workflow
 
+How we work together is a different question from what the product is.
 Everyday picture I already know: I could zip files and email them, or use a
-built-in share action. The built-in shortcut is the better choice when the
-other person needs to keep working tonight and I do not want them to unpack
-and rebuild. It must still deliver what a careful manual copy aims to
-provide: a complete, immediately usable project.
+Share button in a slideshow app. That Share-button picture belongs only here,
+as an analogy for our Git workflow. It is not the PREIshare product.
 
 | Everyday picture | PREIshare engineering parallel |
 | --- | --- |
@@ -108,11 +108,10 @@ explain to a teammate in plain speech. If an assistant replaces my meaning
 with a different product story, I will put my words back.
 
 On this file, I used an assistant as a writing coach. I supplied the mission:
-PREIshare is a built-in shortcut that hands off a ready-to-use copy of project
-files or settings so the other person does not rebuild finished work. The
-assistant helped with headings and the workflow table. The three PREIshare
-checks and the Share-button / no-zip / not-view-only picture are mine from
-the course lesson.
+PREIshare is a real-estate intelligence product that turns property and
+market data into better decisions. The assistant helped with headings and
+the workflow table. The Share-button / zip picture stays only as an everyday
+analogy for how we open a pull request—not as the product story.
 
 Orientation is complete when I can tell a human what PREIshare is, who is in
 the pull-request loop, and what “first PR done” means—before I configure
