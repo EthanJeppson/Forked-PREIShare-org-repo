@@ -1,77 +1,118 @@
 # PREIshare team orientation notes
 
-These notes start from a one-sentence mission and a role list written by the author, then get structured into the sections this team expects. The assistant helped with layout and wording. The ideas are the author’s.
+Author: Ethan Jeppson
+Date: 2026-09-18
 
-This checkout is still small. The only files verified here are this document and the root `README.md`. No Git commands and no extra folder names are invented below.
+## 0. Team repository of record
 
-## Mission
+- **Team repo (upstream):** https://github.com/EdTechForLearning/PREIShare-org-repo
+- **My fork:** https://github.com/EthanJeppson/Forked-PREIShare-org-repo
+- I contribute by forking this repo and opening pull requests from my fork. I do not push to the team repo directly.
 
-PREIshare is a standard for sharing and collaborating on a project so someone else can receive an exact, complete copy and does not have to rebuild anything.
+## 1. Product mission (my words)
 
-In practice that means the team keeps one shared project of record, called **main**, and treats a successful share as: the recipient has the same project, ready to use, not a pile of missing pieces they must reconstruct.
+PREIshare is a real-estate intelligence product. It takes property facts and
+market data and turns them into a picture a person can use when they have to
+choose what to do next with a building, a neighborhood, or a deal.
 
-## Workflow mapping
+Property data is the close-up: what a place costs, how it is performing, what
+condition it is in, and what is happening on that site. Market data is the
+wider view: how similar properties are doing, which areas are heating up or
+cooling off, and what buyers, sellers, and operators are seeing right now.
+Intelligence is the step after collecting those numbers. Raw spreadsheets
+are not the product. The product is a clearer story that helps someone make
+a better real-estate decision with less guesswork.
 
-This table maps the author’s role list onto the order of work. It describes what happens, not which commands to type.
+The decision can be small or large—buy, hold, sell, skip, or look in a
+different market—but it has to be a real choice, not just more charts. If
+the data does not help a human decide, it is not doing the PREIshare job.
 
-| Goal | What “done” looks like | How the work moves |
-| --- | --- | --- |
-| Share a complete project | The recipient has an exact copy and does not rebuild | Hand over the main project, or a complete copy of it, using the team’s already-built sharing tools |
-| Keep main stable while people work | People can work on different parts without editing main directly | Copy main, change the copy, then propose that those changes be added back |
-| Work on main together | Everyone can share the same main when that is the chosen mode | Use the pre-built tools on the shared main instead of forking off a copy |
-| Accept a change onto main | The group has agreed the change belongs on main | Someone proposes a change → the change is checked against standards or rules → the group reviews it → if allowed, it is incorporated into main |
+The three checks I will use before I call something PREIshare:
 
-Two ways of working are both allowed by that list:
+1. **Property and market inputs.** It starts from real-estate facts, not from
+   a blank guess or a slogan.
+2. **Turned into a usable picture.** A person can read the result and tell
+   what the data is saying about a property or a market.
+3. **Supports a better decision.** The output helps someone choose a next
+   step, instead of leaving them to reconstruct the meaning by hand.
 
-1. Everyone works on the same main and shares it with pre-built tools.
-2. People copy main, work on different parts, and add those parts back to main only after the proper procedure (or group consensus).
+This team is building that intelligence loop. My job as a new contributor is
+to join the product work safely—not to rewrite the shared project on day one.
 
-In both ways, main is the project that counts. Copies are for work in progress. Copies are not the record until the group lets them in.
+## 2. Everyday collaboration → engineering workflow
 
-## PR actors
+How we work together is a different question from what the product is.
+Everyday picture I already know: I could zip files and email them, or use a
+Share button in a slideshow app. That Share-button picture belongs only here,
+as an analogy for our Git workflow. It is not the PREIshare product.
 
-These are the people and places in that structure. “PR” here means a proposed change waiting for review, not a specific button name.
+| Everyday picture | PREIshare engineering parallel |
+| --- | --- |
+| The class binder everyone presents from | The shared default branch on the team repository |
+| The magic tear-off slip that makes a matching binder | A built-in copy of that project I can open and edit as my own |
+| My draft pages before I hand over the slip | My separate line of work with a small change |
+| Notes on what I changed in this draft | Short written history of each save |
+| Asking a classmate to check the pages before they join the class binder | Opening a pull request so a teammate can review |
+| They approve, then the class binder updates | Review passes, then the change can join the shared project |
+| A view-only slideshow link | Looking without getting a copy you can continue from (not PREIshare) |
+| Zipping files and emailing them | A manual package, not a built-in shortcut (not PREIshare) |
 
-- **Main.** The shared project of record. It is either what everyone works on together, or the source that copies are taken from and later added back to.
-- **Copy workers.** People who take a copy of main so they can work on a part. Their job is to change the copy, not to quietly overwrite main.
-- **Proposer.** The person who asks for a change to be added to main. They must be able to say what changed and why it should be allowed in.
-- **Standards check.** The pass that asks: does this change follow the team’s rules? This can be a person, a checklist, or later an automated check. This checkout does not yet document a specific checker, so this notes file only names the role.
-- **Group reviewers.** The people who read the proposed change and decide whether it may be incorporated. Review is a group decision (consensus), not a private “I like it.”
-- **Incorporator.** The person (or people) allowed to add an approved change onto main. Adding to main happens after proposal, standards check, and group review — not before.
+## 3. Actors in a pull-request workflow
 
-## Definition of done
+- **Contributor (me):** picks a tiny safe change, works on my own ready copy,
+  writes down what I did, and answers review questions.
+- **Reviewer (teammate or a simulated reviewer):** checks that the change is
+  correct, small enough to understand, clearly described, and still a ready
+  copy the next person can use.
+- **Shared repository:** the team’s source of truth on GitHub. Even if a tool
+  would let me edit it directly, the team process is: draft on my copy first,
+  review second, then accept onto the shared project.
+- **Automation (later):** extra checks may run on the pull request. If those
+  checks fail, I treat that as a real blocker, not background noise.
 
-A PREIshare share or change is done when all of the following are true:
+## 4. First-PR definition of done (beginner-safe)
 
-- The recipient can get an exact, complete copy of the project and does not need to rebuild missing pieces.
-- There is a clear main project. People know whether they are working on main or on a copy.
-- If work happened on a copy, that work is proposed for main rather than dropped onto main by surprise.
-- The proposed change has been checked against the team’s standards or rules.
-- The group has reviewed the change and agreed it may be incorporated.
-- Only then is the change added to main.
-- The notes that describe this process are sentences the author can explain to a teammate in plain speech.
+My first reviewed pull request is done only when all of the following are true:
 
-For this first document itself, done also means: the file lives at `docs/onboarding/team-orientation-notes.md`, the required sections are present, and no unverified Git commands or folder names were added.
+1. **Scoped:** The change is intentionally small (for example these onboarding
+   notes)—not a multi-feature rewrite.
+2. **Isolated:** I worked on a separate line of work. I did not edit the shared
+   default copy directly.
+3. **Described:** The pull request says why the change exists, what files
+   changed, and how a reviewer can check it.
+4. **Reviewable:** A teammate can understand the difference without a meeting.
+   Notes capture any decisions or follow-ups.
+5. **Verified:** I re-read my own change and fixed obvious mistakes before I
+   asked for review.
+6. **PREIshare-ready:** After review, the shared project is still a complete
+   copy someone else can open and continue from. I used the team’s built-in
+   sharing path. I did not leave a zip, a screenshot, a view-only peek, or a
+   rebuild-from-scratch gap.
+7. **Aligned:** The change matches team conventions I will learn in later
+   steps (repo map, AI rules, and best practices).
 
-## Out of scope
+## 5. Out of scope for the first PR
 
-This orientation task does not include:
+- Large rewrites, dependency upgrades, or database structure changes
+- Secrets, production passwords, or real customer data
+- Extra unrelated edits that make the review bigger than it needs to be
+- Calling a zip email, a screenshot, rebuild instructions, or a view-only
+  link “PREIshare”
 
-- Rebuilding the project from scratch when a complete copy should have been shared instead.
-- Adding work to main without a proposal, a standards check, and group review.
-- Treating a personal copy as if it were already main.
-- Inventing Git command lists or application folders that are not in this checkout.
-- Claiming tools, servers, or checkers exist here when they have not been verified.
-- Letting an assistant replace the author’s mission and roles with a different product story.
+## 6. How I will use AI on this team
 
-## AI-use stance
+I will prompt agents in small cycles: understand → plan → prompt → review → refine.
 
-Use a chat assistant as a writing coach, not as the author of record.
+I will not paste secrets into agents. I will not accept agent output I cannot
+explain to a teammate in plain speech. If an assistant replaces my meaning
+with a different product story, I will put my words back.
 
-1. **Write first.** The author writes the mission and the role or “done” list in their own words.
-2. **Ask for structure, not new ideas.** Give the assistant those bullets, the filename `docs/onboarding/team-orientation-notes.md`, and the required sections: mission, workflow mapping table, PR actors, definition of done, out of scope, AI-use stance.
-3. **Constrain the draft.** Keep language beginner-friendly. Do not invent Git commands. Do not invent repo folder names that have not been verified.
-4. **Rewrite what you cannot explain.** After the draft, any sentence the author could not say to a teammate in plain speech gets rewritten. Those sentences are the ones that fail review later.
-5. **Check the files.** Read the saved markdown. Confirm it still matches the author’s mission and roles, not a story the assistant invented.
+On this file, I used an assistant as a writing coach. I supplied the mission:
+PREIshare is a real-estate intelligence product that turns property and
+market data into better decisions. The assistant helped with headings and
+the workflow table. The Share-button / zip picture stays only as an everyday
+analogy for how we open a pull request—not as the product story.
 
-The assistant may fix layout, headings, and wording. It may not replace the author’s meaning.
+Orientation is complete when I can tell a human what PREIshare is, who is in
+the pull-request loop, and what “first PR done” means—before I configure
+tools or write application code.
