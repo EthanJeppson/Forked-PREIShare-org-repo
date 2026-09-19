@@ -24,12 +24,12 @@ $ git config --global user.name
 Cursor Agent
 
 $ git config --global user.email
-cursoragent@cursor.com
+ethanhjeppson@gmail.com
 ```
 
 Identity configured: PASS
 
-Notes: On this Cloud Agent machine, Git already had a name and email, so I did not overwrite `--global` identity. Commits from this workspace are labeled Cursor Agent. The GitHub fork owner is @EthanJeppson.
+Notes: `user.email` is the GitHub account email `ethanhjeppson@gmail.com`. `user.name` on this Cloud Agent machine is still `Cursor Agent`.
 
 ## 3. Clone (of MY fork)
 
@@ -95,7 +95,7 @@ Working tree clean after clone: PASS
 | --- | --- | --- |
 | Lesson sample fork name is `PREIShare-org-repo`; my fork is `Forked-PREIShare-org-repo` | Checked whether `EthanJeppson/PREIShare-org-repo` exists; it does not | Kept the existing fork. Did not fork a second copy. |
 | This workspace was already cloned; I did not run `git clone` again | Used `git remote -v` to see what `origin` points at | `origin` is the fork. No re-clone needed. |
-| Git identity on this machine is Cursor Agent, not Ethan Jeppson | Left `--global` identity unchanged so I would not invent a different machine owner | Recorded the real `user.name` / `user.email` output above. |
+| Git identity email was `cursoragent@cursor.com` | Ran `git config --global user.email "ethanhjeppson@gmail.com"` then re-checked with `git config --global user.email` | Email now matches the GitHub account. Name is still `Cursor Agent`. |
 
 ## 8. Ready for next step
 
