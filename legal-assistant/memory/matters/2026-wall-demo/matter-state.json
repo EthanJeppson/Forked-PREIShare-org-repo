@@ -1,0 +1,13 @@
+{
+  "matter_id": "2026-wall-demo",
+  "client_id": "globex-industries",
+  "caption": "Globex wall demo (fictional)",
+  "supervising_attorney": "n.park",
+  "privilege_class_default": "highly_restricted",
+  "governing_law": "new-york",
+  "forum": "",
+  "ethical_wall": true,
+  "walled_from_matter_ids": ["2026-cv-northwind-meridian"],
+  "related_matter_ids": [],
+  "practice_areas": []
+}

@@ -1,0 +1,70 @@
+{
+  "id": "retrieval-policy",
+  "description": "What the assistant may pull, in what order, and what it must refuse to mix.",
+  "query_keys": [
+    "matter_id",
+    "client_id",
+    "document_type",
+    "jurisdiction",
+    "privilege_class",
+    "task"
+  ],
+  "sources": [
+    {
+      "id": "guides",
+      "kind": "files",
+      "scope": "firm",
+      "rank": "authority"
+    },
+    {
+      "id": "firm_precedent",
+      "kind": "json",
+      "path": "memory/firm/precedent-rules.json",
+      "filter": ["document_types", "jurisdictions", "practice_areas"],
+      "rank": "authority"
+    },
+    {
+      "id": "matter_files",
+      "kind": "files",
+      "path": "memory/matters/{matter_id}/",
+      "rank": "state"
+    },
+    {
+      "id": "client_files",
+      "kind": "files",
+      "path": "memory/clients/{client_id}/",
+      "rank": "preference",
+      "requires": "client_id matches matter.client_id"
+    },
+    {
+      "id": "jurisdiction_files",
+      "kind": "files",
+      "path": "memory/jurisdictions/{jurisdiction}.md",
+      "rank": "authority_color"
+    },
+    {
+      "id": "skills",
+      "kind": "files",
+      "path": "skills/{skill}/SKILL.md",
+      "rank": "procedure",
+      "load": "on_demand"
+    },
+    {
+      "id": "working_set",
+      "kind": "dms",
+      "rank": "evidence"
+    }
+  ],
+  "ranking": {
+    "authority_over_recency": true,
+    "taken_positions_over_new_drafts": true,
+    "defined_terms_lock_over_ocr": true,
+    "as_of_date_required_for_law": true
+  },
+  "refusals": [
+    "retrieve another client's files because they had a similar NDA",
+    "retrieve walled matter files with names stripped",
+    "retrieve 'whatever Harvey already knows' without a path",
+    "use ChatGPT Memory as a client store"
+  ]
+}

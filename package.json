@@ -9,7 +9,9 @@
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:legal-assistant": "node --experimental-strip-types --test legal-assistant/runtime/*.test.ts",
+    "legal-assistant:assemble": "node --experimental-strip-types legal-assistant/runtime/cli.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

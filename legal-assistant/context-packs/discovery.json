@@ -1,0 +1,23 @@
+{
+  "id": "discovery",
+  "analog_of": "glob rule: **/production/**",
+  "always_apply": false,
+  "triggers": {
+    "document_types": ["discovery-production", "privilege-log", "rfp-response"],
+    "tasks": ["privilege-screen", "log", "review"]
+  },
+  "guides": [
+    "guides/04-privilege-and-confidentiality.md"
+  ],
+  "skills": ["discovery-privilege-log"],
+  "memory": [
+    "memory/matters/{matter_id}/MATTER.md",
+    "memory/matters/{matter_id}/parties.md",
+    "memory/matters/{matter_id}/document-index.md"
+  ],
+  "default_privilege_class": "work_product",
+  "tools_override": {
+    "web_research": false,
+    "email_send": false
+  }
+}

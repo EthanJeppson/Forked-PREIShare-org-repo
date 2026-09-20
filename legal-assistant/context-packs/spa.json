@@ -1,0 +1,23 @@
+{
+  "id": "spa",
+  "analog_of": "glob rule: **/*purchase-agreement*",
+  "always_apply": false,
+  "triggers": {
+    "document_types": ["spa", "stock-purchase-agreement", "asset-purchase-agreement"],
+    "tasks": ["review", "redline"]
+  },
+  "guides": [
+    "guides/03-redline-protocol.md"
+  ],
+  "skills": ["contract-redline"],
+  "memory": [
+    "memory/firm/precedent-rules.json",
+    "memory/matters/{matter_id}/MATTER.md",
+    "memory/matters/{matter_id}/defined-terms.lock.json",
+    "memory/matters/{matter_id}/decisions-log.md",
+    "memory/matters/{matter_id}/issues.md",
+    "memory/clients/{client_id}/risk-tolerance.md",
+    "memory/jurisdictions/{jurisdiction}.md"
+  ],
+  "issue_codes_prefix": "SPA"
+}

@@ -1,0 +1,10 @@
+{
+  "matter_id": "2026-cv-northwind-meridian",
+  "terms": {
+    "Agreement": "this Non-Disclosure Agreement",
+    "Northwind": "Acme Holdings LLC, acting through its Northwind Logistics division",
+    "Meridian": "Meridian Components, Inc.",
+    "Purpose": "evaluation of a potential spare-parts supply arrangement between Northwind and Meridian",
+    "Confidential Information": "information disclosed by Meridian for the Purpose, excluding the standard exclusions"
+  }
+}

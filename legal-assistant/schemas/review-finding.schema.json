@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harbor-quill/review-finding",
+  "title": "ReviewFinding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "issue_code",
+    "severity",
+    "document_id",
+    "pin",
+    "summary",
+    "proposed_action"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "issue_code": { "type": "string" },
+    "severity": {
+      "type": "string",
+      "enum": ["hard_stop", "partner_approval", "material", "housekeeping", "note"]
+    },
+    "document_id": { "type": "string" },
+    "pin": { "type": "string" },
+    "summary": { "type": "string" },
+    "proposed_action": { "type": "string" },
+    "authority": { "type": "string" },
+    "as_of": { "type": "string" },
+    "jurisdiction": { "type": "string" },
+    "confidence": {
+      "type": "string",
+      "enum": ["verified_in_context", "unverified", "split", "authority_gap"]
+    },
+    "precedent_rule_id": { "type": "string" },
+    "output_class": {
+      "type": "string",
+      "enum": ["internal_only", "sendable"]
+    }
+  }
+}
