@@ -44,7 +44,7 @@
 - [x] No secrets or personal data beyond what the team expects on GitHub
 - [x] Notes explain agent cycles and review decisions
 - [x] No `src/`, config, lockfile, or `.env` files in the diff
-- [ ] Ready for commit + PR in the next step (changes are in the working tree, not committed or staged by design)
+- [x] Ready for commit + PR (committed in `053214b` and pushed in the PR step)
 
 ## Risks / open questions
 - Plan gap: the plan's acceptance criteria name the name, handle and role but not an "Onboarded" date. I added the column from the lesson scaffold, using 2026-10-04.
