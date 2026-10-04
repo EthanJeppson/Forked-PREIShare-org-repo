@@ -1,7 +1,7 @@
 # Vercel Hobby setup — PREIshare investor app
 
 **Date:** 2026-10-04
-**Vercel plan:** TODO — confirm Hobby (free), not Pro, in the Vercel dashboard before checking this off
+**Vercel plan:** Hobby (free) — not Pro (confirmed by Ethan in the Vercel dashboard, 2026-10-04)
 
 ## URLs (the same ones you will reuse all semester)
 
@@ -28,6 +28,6 @@
 
 ## First production deploy
 
-- Status: first build on `main` was blocked by Vercel because `@tanstack/react-start@1.168.32` was flagged vulnerable. Fixed by updating to `1.168.60` (PR #7) and redeploying. After that the Production URL serves the app. TODO: confirm the deployment shows Ready in the Vercel dashboard.
+- Status: first build on `main` was blocked by Vercel because `@tanstack/react-start@1.168.32` was flagged vulnerable. Fixed by updating to `1.168.60` (PR #7) and redeploying. After that the Production URL serves the app. The Production deployment shows Ready in the Vercel dashboard (confirmed by Ethan, 2026-10-04).
 - Reachability check (curl, 2026-10-04): `/` and `/about` both returned HTTP 200 and the page title is "TanStack Start Starter" (the app is still the starter UI).
 - Incognito check of Production URL: pass (2026-10-04, private Chrome window showed the TanStack Start base template home page, not the Vercel dashboard)
