@@ -33,7 +33,7 @@
 - One mistake of mine: my first status check ran in parallel with the file write and reported no `CONTRIBUTORS.md`. I re-ran it after the write finished and the file was present. Lesson: run checks after the edit completes, not alongside it.
 
 ## Final diff summary
-- Paths changed in this step (uncommitted): `CONTRIBUTORS.md`, `docs/onboarding/first-contribution-notes.md`.
+- Paths changed in this step: `CONTRIBUTORS.md`, `docs/onboarding/first-contribution-notes.md` (committed in `053214b`).
 - `docs/onboarding/first-contribution-plan.md` is already committed on this branch from the previous step, so `git diff main --stat` also lists it. It is in scope.
 - Paths intentionally NOT changed: `README.md`, `AGENTS.md`, `.cursorrules`, `package.json`, `package-lock.json`, `src/**`, `vite.config.ts`, `tsconfig.json`, `docs/requirements-brief.md`, any `.env`.
 

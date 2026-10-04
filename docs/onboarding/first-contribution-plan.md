@@ -38,6 +38,7 @@ Note: on `main` of my fork only `team-orientation-notes.md` is currently present
 | `docs/onboarding/first-contribution-plan.md` | create (this step) | The written scope contract, committed with the implementation |
 | `docs/onboarding/first-contribution-notes.md` | create (next step) | Record what the agent did and what I verified |
 | `docs/onboarding/pr-description.md` | create (PR step, added to plan) | Saved copy of the PR description and the PR URL |
+| `docs/onboarding/review-response-notes.md` | create (review step, added to plan) | Record simulated review feedback, decisions, and re-verification |
 
 No other paths should appear in the PR diff.
 
@@ -45,14 +46,14 @@ No other paths should appear in the PR diff.
 - [ ] `git branch --show-current` prints `docs/first-contribution-ethanjeppson`, and the PR is opened from that branch, not from `main`.
 - [ ] `CONTRIBUTORS.md` exists at the repo root and contains exactly one contributor entry: `Ethan Jeppson`, `@EthanJeppson`, `Onboarding engineer`.
 - [ ] `CONTRIBUTORS.md` is plain Markdown (a heading plus a list or table) with no HTML, images, or links other than `https://github.com/EthanJeppson`.
-- [ ] `git diff --name-only main` lists only `CONTRIBUTORS.md`, `docs/onboarding/first-contribution-plan.md`, `docs/onboarding/first-contribution-notes.md`, and `docs/onboarding/pr-description.md`.
+- [ ] `git diff --name-only main` lists only `CONTRIBUTORS.md`, `docs/onboarding/first-contribution-plan.md`, `docs/onboarding/first-contribution-notes.md`, `docs/onboarding/pr-description.md`, and `docs/onboarding/review-response-notes.md`.
 - [ ] No `src/`, `package.json`, `package-lock.json`, config, `.env`, or build-output files appear in the diff.
 - [ ] A teammate can read the whole diff in under 10 minutes without product-context deep dives.
 
 ## Verification plan (how I will know it worked)
 1. Run `git branch --show-current` and confirm it prints `docs/first-contribution-ethanjeppson`.
 2. Run `git status --short` and confirm only the files in the likely-files table are new, with nothing else modified or untracked (no `.env`, no `node_modules` or build output).
-3. Run `git diff --name-only main` after committing and confirm the same four paths, and no others.
+3. Run `git diff --name-only main` after committing and confirm the same five paths, and no others.
 4. Open `CONTRIBUTORS.md` (or the GitHub preview) and confirm my name, handle, and role render as plain Markdown.
 5. Skim `git diff main` once and confirm every changed line is a Markdown doc line.
 6. No UI touch is included, so I will not run the dev server and will skip `npm run dev`.
