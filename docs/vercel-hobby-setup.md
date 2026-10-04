@@ -1,15 +1,15 @@
 # Vercel Hobby setup — PREIshare investor app
 
 **Date:** 2026-10-04
-**Vercel plan:** TODO — confirm Hobby (free), not Pro, in the Vercel dashboard before checking this off
+**Vercel plan:** Hobby (free) — not Pro (confirmed by Ethan in the Vercel dashboard, 2026-10-04)
 
 ## URLs (the same ones you will reuse all semester)
 
 | Item | Value |
 | --- | --- |
 | GitHub repository (you can push) | `https://github.com/EthanJeppson/Forked-PREIShare-org-repo` |
-| Instructor collaborator | `thortek` added: no (checked 2026-10-04 via GitHub API; only `EthanJeppson` is listed) — TODO update to yes after inviting |
-| Vercel Production URL | TODO — `https://<project>.vercel.app` after the first Production deploy is Ready |
+| Instructor collaborator | `thortek` added: yes, invitation sent 2026-10-04 (reported by me; the GitHub API lists only `EthanJeppson` as an accepted collaborator, so the invite is likely pending until the instructor accepts) |
+| Vercel Production URL | `https://forked-prei-share-org-repo-coral.vercel.app/` (no `-git-` or hash in the host; confirm it is listed under Project → Domains as Production) |
 | Preview URLs | Do **not** submit these to Canvas |
 
 ## Hobby constraints I will keep
@@ -28,5 +28,6 @@
 
 ## First production deploy
 
-- Status: TODO — not deployed yet (Ready / Failed; if failed, paste what you changed)
-- Incognito check of Production URL: TODO (pass / fail)
+- Status: first build on `main` was blocked by Vercel because `@tanstack/react-start@1.168.32` was flagged vulnerable. Fixed by updating to `1.168.60` (PR #7) and redeploying. After that the Production URL serves the app. The Production deployment shows Ready in the Vercel dashboard (confirmed by Ethan, 2026-10-04).
+- Reachability check (curl, 2026-10-04): `/` and `/about` both returned HTTP 200 and the page title is "TanStack Start Starter" (the app is still the starter UI).
+- Incognito check of Production URL: pass (2026-10-04, private Chrome window showed the TanStack Start base template home page, not the Vercel dashboard)
