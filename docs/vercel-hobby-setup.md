@@ -9,7 +9,7 @@
 | --- | --- |
 | GitHub repository (you can push) | `https://github.com/EthanJeppson/Forked-PREIShare-org-repo` |
 | Instructor collaborator | `thortek` added: no (checked 2026-10-04 via GitHub API; only `EthanJeppson` is listed) — TODO update to yes after inviting |
-| Vercel Production URL | TODO — `https://<project>.vercel.app` after the first Production deploy is Ready |
+| Vercel Production URL | `https://forked-prei-share-org-repo-coral.vercel.app/` (no `-git-` or hash in the host; confirm it is listed under Project → Domains as Production) |
 | Preview URLs | Do **not** submit these to Canvas |
 
 ## Hobby constraints I will keep
@@ -28,5 +28,6 @@
 
 ## First production deploy
 
-- Status: TODO — not deployed yet (Ready / Failed; if failed, paste what you changed)
-- Incognito check of Production URL: TODO (pass / fail)
+- Status: first build on `main` was blocked by Vercel because `@tanstack/react-start@1.168.32` was flagged vulnerable. Fixed by updating to `1.168.60` (PR #7) and redeploying. After that the Production URL serves the app. TODO: confirm the deployment shows Ready in the Vercel dashboard.
+- Reachability check (curl, 2026-10-04): `/` and `/about` both returned HTTP 200 and the page title is "TanStack Start Starter" (the app is still the starter UI).
+- Incognito check of Production URL: TODO (pass / fail) — open it yourself in a private window
