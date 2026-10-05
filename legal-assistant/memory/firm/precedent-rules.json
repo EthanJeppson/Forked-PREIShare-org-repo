@@ -1,0 +1,98 @@
+{
+  "firm": "Harbor & Quill LLP (fictional fixture)",
+  "as_of": "2026-09-01",
+  "rules": [
+    {
+      "id": "HQ-NDA-RESIDUALS",
+      "statement": "Do not accept a residuals or unaided-memory clause unless the client file sets residuals_opt_in true.",
+      "severity": "hard_stop",
+      "document_types": ["nda", "confidentiality-agreement", "mutual-nda"],
+      "jurisdictions": ["*"],
+      "exception_if": "client.residuals_opt_in == true",
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-09-01"
+    },
+    {
+      "id": "HQ-NDA-TERM",
+      "statement": "Confidentiality term default is 3 years for commercial information and perpetual for trade secrets.",
+      "severity": "material",
+      "document_types": ["nda", "confidentiality-agreement", "mutual-nda"],
+      "jurisdictions": ["*"],
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-06-15"
+    },
+    {
+      "id": "HQ-K-CAP-12M",
+      "statement": "On vendor paper, limitation of liability cap defaults to 12 months of fees paid.",
+      "severity": "material",
+      "document_types": ["msa", "sow", "vendor-paper", "professional-services"],
+      "jurisdictions": ["*"],
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-04-02"
+    },
+    {
+      "id": "HQ-K-IND-IP-UNLIMITED",
+      "statement": "Unlimited indemnification for IP infringement requires partner approval.",
+      "severity": "partner_approval",
+      "document_types": ["msa", "sow", "spa", "vendor-paper"],
+      "jurisdictions": ["*"],
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-04-02"
+    },
+    {
+      "id": "HQ-K-EFFORTS",
+      "statement": "Use commercially reasonable efforts; reject best efforts unless the client file says otherwise.",
+      "severity": "material",
+      "document_types": ["nda", "msa", "sow", "spa", "professional-services"],
+      "jurisdictions": ["*"],
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-01-20"
+    },
+    {
+      "id": "HQ-K-SANDBAG-DE",
+      "statement": "On Delaware-governed purchase agreements, prefer pro-sandbagging (buyer may rely on representations regardless of knowledge). Anti-sandbagging is partner_approval.",
+      "severity": "partner_approval",
+      "document_types": ["spa", "stock-purchase-agreement", "asset-purchase-agreement"],
+      "jurisdictions": ["delaware"],
+      "owner": "m-and-a",
+      "last_reviewed": "2026-03-01"
+    },
+    {
+      "id": "HQ-K-SANDBAG-NY",
+      "statement": "On New York-governed purchase agreements, sandbagging is unsettled; flag and do not silently accept anti-sandbagging.",
+      "severity": "material",
+      "document_types": ["spa", "stock-purchase-agreement", "asset-purchase-agreement"],
+      "jurisdictions": ["new-york", "ny-commercial"],
+      "owner": "m-and-a",
+      "last_reviewed": "2026-03-01"
+    },
+    {
+      "id": "HQ-EMP-CA-NONCOMPETE",
+      "statement": "Non-competes in California employment or contractor overlays are a hard stop.",
+      "severity": "hard_stop",
+      "document_types": ["employment", "contractor", "nda", "msa"],
+      "jurisdictions": ["california"],
+      "practice_areas": ["employment"],
+      "owner": "employment",
+      "last_reviewed": "2026-08-01"
+    },
+    {
+      "id": "HQ-K-AI-TRAINING",
+      "statement": "Counterparty may not train models on client confidential information.",
+      "severity": "hard_stop",
+      "document_types": ["msa", "sow", "nda", "vendor-paper", "professional-services"],
+      "jurisdictions": ["*"],
+      "owner": "commercial-practice",
+      "last_reviewed": "2026-09-01"
+    },
+    {
+      "id": "HQ-NY-JURY",
+      "statement": "Jury-trial waivers on New York commercial contracts are a client preference issue for Acme-like financial clients; flag, do not auto-accept.",
+      "severity": "note",
+      "document_types": ["msa", "spa", "nda", "credit"],
+      "jurisdictions": ["new-york", "ny-commercial"],
+      "owner": "litigation",
+      "last_reviewed": "2026-05-12"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harbor-quill/memory-record",
+  "title": "MemoryRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "layer",
+    "scope_id",
+    "statement",
+    "status",
+    "confidence",
+    "as_of",
+    "observed_at",
+    "author"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "layer": {
+      "type": "string",
+      "enum": ["firm", "client", "jurisdiction", "matter", "session"]
+    },
+    "scope_id": { "type": "string", "minLength": 1 },
+    "statement": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "active", "superseded"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["verified_in_context", "unverified", "split"]
+    },
+    "as_of": { "type": "string", "format": "date" },
+    "observed_at": { "type": "string", "format": "date" },
+    "author": { "type": "string", "minLength": 1 },
+    "source_document_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "supersedes": { "type": "string" },
+    "precedent_rule_id": { "type": "string" }
+  }
+}

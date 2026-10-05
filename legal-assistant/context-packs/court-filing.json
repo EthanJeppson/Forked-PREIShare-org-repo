@@ -1,0 +1,22 @@
+{
+  "id": "court-filing",
+  "always_apply": false,
+  "triggers": {
+    "document_types": ["complaint", "answer", "motion", "brief", "declaration"],
+    "tasks": ["review", "cite-check"]
+  },
+  "guides": [
+    "guides/02-citation-and-authority.md"
+  ],
+  "skills": ["issue-spotting-memo"],
+  "memory": [
+    "memory/matters/{matter_id}/MATTER.md",
+    "memory/matters/{matter_id}/issues.md",
+    "memory/matters/{matter_id}/chronology.md",
+    "memory/jurisdictions/{jurisdiction}.md"
+  ],
+  "citation_mode": "strict",
+  "tools_override": {
+    "court_file": false
+  }
+}

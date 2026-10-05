@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harbor-quill/matter-state",
+  "title": "MatterState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "matter_id",
+    "client_id",
+    "supervising_attorney",
+    "privilege_class_default",
+    "governing_law"
+  ],
+  "properties": {
+    "matter_id": { "type": "string" },
+    "client_id": { "type": "string" },
+    "caption": { "type": "string" },
+    "supervising_attorney": { "type": "string" },
+    "privilege_class_default": {
+      "type": "string",
+      "enum": [
+        "public",
+        "confidential",
+        "attorney_client",
+        "work_product",
+        "highly_restricted"
+      ]
+    },
+    "governing_law": { "type": "string" },
+    "forum": { "type": "string" },
+    "ethical_wall": { "type": "boolean" },
+    "walled_from_matter_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "related_matter_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "practice_areas": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

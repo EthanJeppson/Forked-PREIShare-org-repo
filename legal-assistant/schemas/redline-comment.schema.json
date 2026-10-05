@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harbor-quill/redline-comment",
+  "title": "RedlineComment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "finding_id",
+    "output_class",
+    "span",
+    "ask"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "finding_id": { "type": "string" },
+    "precedent_rule_id": { "type": "string" },
+    "output_class": {
+      "type": "string",
+      "enum": ["internal_only", "sendable"]
+    },
+    "span": { "type": "string" },
+    "ask": { "type": "string" },
+    "fallback": { "type": "string" },
+    "walk_away": { "type": "string" },
+    "reversal": { "type": "boolean" },
+    "reason": { "type": "string" }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "nda",
+  "analog_of": "glob rule: **/*nda*",
+  "always_apply": false,
+  "triggers": {
+    "document_types": ["nda", "confidentiality-agreement", "mutual-nda"],
+    "tasks": ["review", "redline"]
+  },
+  "guides": [
+    "guides/03-redline-protocol.md"
+  ],
+  "skills": ["nda-review"],
+  "memory": [
+    "memory/firm/precedent-rules.json",
+    "memory/matters/{matter_id}/MATTER.md",
+    "memory/matters/{matter_id}/defined-terms.lock.json",
+    "memory/matters/{matter_id}/decisions-log.md",
+    "memory/clients/{client_id}/preferences.md",
+    "memory/jurisdictions/{jurisdiction}.md"
+  ],
+  "issue_codes_prefix": "NDA"
+}

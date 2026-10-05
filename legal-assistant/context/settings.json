@@ -1,0 +1,72 @@
+{
+  "id": "harbor-quill-context-settings",
+  "analog_of": "IDE context window + rules injection + skill loading",
+  "window": {
+    "max_input_tokens": 32000,
+    "reserve_output_tokens": 4000,
+    "chars_per_token_estimate": 4,
+    "layer_budgets": {
+      "ethical_invariants": 1500,
+      "firm_rules": 3000,
+      "matter_constitution": 4000,
+      "privilege_policy": 1200,
+      "jurisdiction": 2000,
+      "client_preferences": 1500,
+      "skill": 3500,
+      "working_documents": 12000,
+      "session": 2000
+    },
+    "drop_order": [
+      "session",
+      "working_documents",
+      "attorney_style",
+      "client_style",
+      "jurisdiction",
+      "skill"
+    ],
+    "never_drop": [
+      "ethical_invariants",
+      "firm_rules",
+      "privilege_policy",
+      "matter_taken_positions"
+    ]
+  },
+  "injection": {
+    "always": [
+      "guides/00-ethical-invariants.md",
+      ".legalrules.md",
+      "LEGAL.md",
+      "guides/01-review-standards.md",
+      "guides/02-citation-and-authority.md",
+      "guides/06-memory-write-protocol.md"
+    ],
+    "if_not_public": [
+      "guides/04-privilege-and-confidentiality.md"
+    ],
+    "if_redline": [
+      "guides/03-redline-protocol.md"
+    ],
+    "jurisdiction_guide": "guides/05-jurisdiction-routing.md"
+  },
+  "tools": {
+    "default": {
+      "dms_read": true,
+      "dms_write_final": false,
+      "web_research": false,
+      "email_send": false,
+      "court_file": false,
+      "memory_write_proposed": true,
+      "memory_write_active": false
+    },
+    "web_research_requires": {
+      "privilege_class": ["public"],
+      "attorney_enable": true
+    }
+  },
+  "isolation": {
+    "require_matter_id": true,
+    "forbid_cross_client_retrieval": true,
+    "forbid_global_product_memory_for_client_facts": true,
+    "ethical_wall_blocks_related_matters": true
+  }
+}

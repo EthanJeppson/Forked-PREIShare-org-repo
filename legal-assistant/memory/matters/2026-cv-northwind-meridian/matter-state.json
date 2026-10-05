@@ -1,0 +1,13 @@
+{
+  "matter_id": "2026-cv-northwind-meridian",
+  "client_id": "acme-holdings",
+  "caption": "Acme Holdings LLC (Northwind Logistics division) / Meridian Components, Inc. — inbound NDA and prospective spare-parts MSA",
+  "supervising_attorney": "a.reyes",
+  "privilege_class_default": "confidential",
+  "governing_law": "delaware",
+  "forum": "Delaware Court of Chancery (proposed)",
+  "ethical_wall": false,
+  "walled_from_matter_ids": [],
+  "related_matter_ids": [],
+  "practice_areas": ["commercial-contracts"]
+}
