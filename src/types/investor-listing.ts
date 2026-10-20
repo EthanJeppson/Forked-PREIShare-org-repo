@@ -1,15 +1,14 @@
 import type { Address } from "./address";
 import type { FinancialSummary } from "./financial-summary";
+import type { InvestorContact } from "./investor-contact";
 import type { ListingStatus } from "./listing-status";
+import type { Ownership } from "./ownership";
 import type { PropertyType } from "./property-type";
 
 /**
  * Core PREIshare investor listing.
  *
  * Source of truth: docs/domain/listing-field-inventory.md.
- *
- * Deferred to later steps (do not add them here):
- * - contacts and ownership (lists)
  */
 export interface InvestorListing {
   /** Stable, unique id for this listing; never reused. */
@@ -32,6 +31,18 @@ export interface InvestorListing {
 
   /** Money summary including the asking price; may be missing while a listing is still being prepared. */
   financials?: FinancialSummary;
+
+  /** People investors can reach about this listing. */
+  contacts: InvestorContact[];
+
+  /**
+   * Id of the main contact; must equal the `id` of one entry in `contacts`.
+   * TypeScript cannot prove that membership, so runtime validation must check it.
+   */
+  primaryContactId: string;
+
+  /** Who owns the property and how that ownership is described. */
+  ownership: Ownership;
 
   /** When the listing record was created, as UTC date-time text (e.g. 2026-03-01T10:00:00Z). */
   createdAt: string;
