@@ -6,22 +6,25 @@ import type { Ownership } from "./ownership";
 import type { PropertyType } from "./property-type";
 
 /**
- * Core PREIshare investor listing.
+ * Fields every investor listing has, whatever its status.
  *
  * Source of truth: docs/domain/listing-field-inventory.md.
  */
-export interface InvestorListing {
-  /** Stable, unique id for this listing; never reused. */
-  id: string;
+export interface InvestorListingBase {
+  /** Stable, unique id for this listing; never reused or reassigned. */
+  readonly id: string;
+
+  /** When the listing record was created, as UTC date-time text (e.g. 2026-03-01T10:00:00Z). Set once. */
+  readonly createdAt: string;
+
+  /** When the listing was last meaningfully edited, as UTC date-time text; never earlier than createdAt. */
+  readonly updatedAt: string;
 
   /** Short name investors see in search results and cards. */
   title: string;
 
   /** Short plain-text summary of the investment opportunity that every listing carries. */
   summary: string;
-
-  /** Where the listing is in its lifecycle; exactly one value from the closed status list. */
-  status: ListingStatus;
 
   /** Asset class of the property; exactly one value from the closed property-type list. */
   propertyType: PropertyType;
@@ -43,10 +46,26 @@ export interface InvestorListing {
 
   /** Who owns the property and how that ownership is described. */
   ownership: Ownership;
-
-  /** When the listing record was created, as UTC date-time text (e.g. 2026-03-01T10:00:00Z). */
-  createdAt: string;
-
-  /** When the listing was last meaningfully edited, as UTC date-time text; never earlier than createdAt. */
-  updatedAt: string;
 }
+
+/**
+ * A listing is one of two shapes, and `status` (the discriminant) picks which.
+ * Only a closed listing has `closedAt`; every other status must leave it out.
+ */
+export type InvestorListing =
+  | (InvestorListingBase & {
+      status: Exclude<ListingStatus, "closed">;
+      /** Not used unless the listing is closed. */
+      closedAt?: undefined;
+    })
+  | (InvestorListingBase & {
+      status: "closed";
+      /** When the deal closed, as UTC date-time text; required for a closed listing. */
+      closedAt: string;
+    });
+
+/** A listing whose status is "closed", so `closedAt` is guaranteed. */
+export type ClosedInvestorListing = Extract<InvestorListing, { status: "closed" }>;
+
+/** A listing in any status other than "closed". */
+export type OpenInvestorListing = Exclude<InvestorListing, { status: "closed" }>;
