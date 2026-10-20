@@ -1,10 +1,12 @@
+import type { ListingStatus } from "./listing-status";
+import type { PropertyType } from "./property-type";
+
 /**
  * Core PREIshare investor listing: scalar (single-value) fields only.
  *
  * Source of truth: docs/domain/listing-field-inventory.md.
  *
  * Deferred to later steps (do not add them here):
- * - status and propertyType (fixed choice lists)
  * - address (nested group)
  * - the rest of financials: currency, projectedIrrPercent, capRatePercent (nested group)
  * - contacts and ownership (lists)
@@ -18,6 +20,12 @@ export interface InvestorListing {
 
   /** Short plain-text summary of the investment opportunity that every listing carries. */
   summary: string;
+
+  /** Where the listing is in its lifecycle; exactly one value from the closed status list. */
+  status: ListingStatus;
+
+  /** Asset class of the property; exactly one value from the closed property-type list. */
+  propertyType: PropertyType;
 
   /** Listed price in the major currency unit (dollars, not cents); must be greater than zero. */
   askingPrice: number;
