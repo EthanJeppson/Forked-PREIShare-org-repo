@@ -34,7 +34,7 @@ These are the only four areas. Anything else is out of scope (see below).
 |------|------------------------------|----------------------------------------------|
 | Home overview | `/dashboard` | Page title "Overview". Three or four stat cards (for example total portfolio value, number of holdings, number of open deals). A short portfolio summary block. A recent-activity list of about 3 to 5 placeholder rows. |
 | Portfolio | `/dashboard/portfolio` | Page title "Portfolio". A table or list of about 3 to 5 mock holdings, each with a property name, property type, and a value. |
-| Deals | `/dashboard/deals` | Page title "Deals". A list of about 3 to 5 mock open deals. Each row shows title, property type, status, and asking price. Rows only show investor-visible statuses (`published`, `under_offer`). |
+| Deals | `/dashboard/deals` | Page title "Deals". A list of about 3 to 5 mock open deals. Each row shows title, property type, status, and asking price. Rows only show investor-visible statuses (`active`, `under_contract`). |
 | Profile | `/dashboard/profile` | Page title "Profile". A profile card with name, email, and phone placeholders. No edit controls. |
 
 Notes for implementers:
@@ -52,7 +52,7 @@ Each line is a yes/no check a person can do in a browser without live data.
 - [ ] Each of `/dashboard/portfolio`, `/dashboard/deals`, and `/dashboard/profile` shows its own visible page title ("Portfolio", "Deals", "Profile").
 - [ ] Every dashboard page uses the same frame: navigation, a header, and a main content region. Only the main content changes between pages.
 - [ ] Every page shows a visible "Mock data" label (a badge or a banner) so a viewer knows the numbers are not real.
-- [ ] The Deals page lists no more than the investor-visible statuses `published` and `under_offer`, and spells them as the team defined them.
+- [ ] The Deals page lists only listings whose status is `active` or `under_contract`, spelled exactly as in `src/types/listing-status.ts`. Draft and closed listings do not appear.
 - [ ] At phone width (about 375px), no page scrolls sideways, no text overlaps, and the four areas are still reachable (the navigation collapses to a menu or moves to a top or bottom bar).
 - [ ] No page shows a login form, a payment form, or an admin or edit screen.
 - [ ] The site has no dashboard pages other than the four above. `/` and `/about` keep working.
@@ -85,13 +85,13 @@ Assumptions (change these here if they are wrong, and later steps will follow):
 
 - UI copy is in English.
 - There is a single investor persona who sees only their own mock data. There is no portfolio switcher.
-- "Deals" means investor listings that investors can see, using the Sprint 2 statuses. Whether `sold` listings also appear is not decided, so this sprint shows only `published` and `under_offer`.
+- "Deals" means investor listings that investors can see, using the statuses in `src/types/listing-status.ts` (`draft`, `active`, `under_contract`, `closed`). Whether `closed` listings also appear is not decided, so this sprint shows only `active` and `under_contract`.
 - The dashboard lives under `/dashboard` and sits beside the existing `/` and `/about` pages. It does not replace them.
 - Visual design stays simple and professional. A full brand system is not required.
 
 Open questions (to confirm with the client before they become real work):
 
 - Should the root `/` page link to `/dashboard`, or stay as the starter page for now?
-- Should sold listings show in Deals later, as the domain brief's open question also asks?
+- Should `closed` (sold) listings show in Deals later? The domain brief (`docs/domain/investor-listing-domain-brief.md`) asks the same question, and it predates the final status names in the code.
 - What should the real portfolio figures mean (invested amount, current value, or both)? This decides the holdings shape in a later sprint.
 - When authentication arrives, should `/dashboard` redirect signed-out visitors to a login page?
