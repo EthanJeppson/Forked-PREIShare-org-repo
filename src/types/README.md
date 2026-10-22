@@ -1,8 +1,8 @@
 # PREIshare investor listing types
 
-This folder will hold the shared TypeScript definitions for **PREIshare investor listings**: the property opportunities investors review on PREIshare.
+This folder holds the shared TypeScript definitions for **PREIshare investor listings**: the property opportunities investors review on PREIshare.
 
-Right now it is intentionally empty of code. This step only sets up the workspace and proves the checker runs. The listing definitions come in later steps.
+Import everything from `src/types/index.ts` (for example `import type { InvestorListing } from "../types"`). Sample data that uses these types lives in `src/fixtures/`.
 
 ## Why this exists
 
@@ -26,15 +26,31 @@ Business vocabulary and rules come from these two files. If code and these files
 - Definitions for listings and their parts (address, financial summary, contacts, ownership, statuses, property classifications).
 - Nothing else: no screens, no API handlers, no database code.
 
-## How to check
+## Typecheck
 
-From the project root, after `npm install`:
+From the project root, after `npm install`, run:
 
 ```bash
 npm run typecheck
 ```
 
-This runs `tsc --noEmit`. TypeScript reads the project's `.ts` and `.tsx` files, reports any problems, and writes no output files. A clean run prints nothing after the command echo and exits with code 0.
+**What success looks like:** the command prints only its own echo line (`> tsc --noEmit`), shows no `error TS...` lines, and exits with code 0. Any `error TS...` line means something is wrong and must be fixed before review.
+
+Notes for beginners:
+
+- `tsc --noEmit` means "check types only; do not write compiled JavaScript files."
+- The clean gate checks the whole project, including `src/types/**` and `src/fixtures/sample-investor-listings.ts`.
+- Intentional bad examples live in `src/fixtures/invalid-listings.errors.ts`, and each one is explained in `docs/type-safety/expected-type-errors.md`. `tsconfig.json` excludes every `src/fixtures/*.errors.ts` file, so they never break the clean gate.
+
+To check the intentional bad examples on their own:
+
+```bash
+npm run typecheck:errors
+```
+
+This one is **supposed to fail**. Success here means exactly one `error TS...` line per row in `docs/type-safety/expected-type-errors.md` (8 today), each in `invalid-listings.errors.ts`, and a non-zero exit code. If it passes, or the errors don't match the doc, the types have become too loose.
+
+Before review, also walk `docs/type-safety/verification-checklist.md`.
 
 ## What "strict" means here
 
@@ -53,4 +69,4 @@ Extra safety flags are also on:
 
 ## Note on the shared project config
 
-This repository is also the TanStack Start app, so `package.json` and `tsconfig.json` are shared with the app rather than being a separate types package. The checker covers all `.ts` and `.tsx` files in the project, which includes everything under `src/types/`.
+This repository is also the TanStack Start app, so `package.json` and `tsconfig.json` are shared with the app rather than being a separate types package. The checker covers all `.ts` and `.tsx` files in the project, including everything under `src/types/`, except the intentional `src/fixtures/*.errors.ts` files. Those are checked by `tsconfig.errors.json` instead.
