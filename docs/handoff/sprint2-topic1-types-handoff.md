@@ -115,26 +115,30 @@ Client pain (loose data)
 
 ## 5. Prompting and review self-assessment
 
-*To be completed by me (the learner), in my own words.*
+- **Prompting habit that helped:** I started every lesson prompt with the exact repo state:
+  - the branch and last commit
+  - which files live in `src/types/`
+  - each type's fields and union members
 
-- **Prompting habit that helped:** I ...
-- **Second prompting habit that helped:** I ...
-- **Review habit that caught an agent mistake:** I ...
-- **What I would do differently next topic:** I ...
-- **Confidence (1–5) explaining InvestorListing to a teammate:** ...
-
-Things that actually happened in this series, to draw from or replace:
-
-- Each lesson prompt started with the exact repo state (branch, last commit, the type files and their fields), so the agent edited the real model instead of guessing.
-- Fixed rules went into every prompt:
-  - no force-push
+  Because of that, the agent edited the real model instead of guessing at a fresh one.
+- **Second prompting habit that helped:** I repeated the same fixed rules in every prompt:
   - run `npm run typecheck` after each step
   - no `as` casts or `as const` in fixtures
-  - flag every difference from the docs
-- I asked for proof with deliberately broken cases (a temporary file of valid and invalid examples) to confirm errors landed only on the intended lines.
-- I asked the agent to compare scaffold field names against the real type files instead of copying the scaffold. This caught `state` vs `region`, `noi`/`capRate`, `name` vs `fullName`, and the made-up roles and property types.
-- After each lesson I asked follow-up questions to explain one contract in plain words.
-- Possible "do differently": settle the `docs/domain/` differences before building, instead of carrying them to the end.
+  - no force-push or amending
+  - flag every difference from `docs/domain/`
+
+  Those rules kept every change small, kept the build green, and made sure no mismatch got buried.
+- **Review habit that caught an agent mistake:** I didn't accept "it typechecks" as proof that a rule works. I required deliberately broken cases in a temporary file and checked that each error landed only on the intended line. I also compared every scaffold field name against the real type files before using it.
+
+  That caught names that would have broken the model:
+  - `state` instead of `region`
+  - `noi` and `capRate`
+  - `name` instead of `fullName`
+  - made-up contact roles and property types
+
+  After each lesson, I explained one contract back in plain words to confirm I understood it.
+- **What I would do differently next topic:** I would settle the differences between `docs/domain/` and the lesson scaffolds before writing any types, instead of carrying a growing list of known mismatches through to the ADR and this handoff.
+- **Confidence explaining InvestorListing to a teammate:** 4 out of 5. I can explain the status union, the nested shapes, and why the bad fixtures fail. I'm less sure how the open `financials` and ownership questions will land in the database design.
 
 ## 6. Handoff checklist for the next owner
 
