@@ -1,0 +1,85 @@
+---
+description: PREIshare project rules for AI coding agents
+alwaysApply: true
+---
+
+# PREIshare — agent rules
+
+## Project identity
+
+PREIshare is a real-estate intelligence product: property and market data
+turned into a picture people can use to decide (buy, hold, sell, skip, or
+look elsewhere). This Git repo is a **single package** at the root (`package.json`
+name `preishare-org-repo`), not an `apps/` / `packages/` monorepo.
+
+Prefer existing files and patterns in this checkout over greenfield frameworks.
+Do not invent folder names from a generic React template.
+
+## Stack (do not substitute)
+
+- Language: TypeScript (strict; see `tsconfig.json`)
+- App framework: TanStack Start + React (file routes in `src/routes/`)
+- Styling in this checkout: Tailwind CSS v4 (`src/styles.css`, `@tailwindcss/vite`)
+- Package manager: npm (`package.json`, `package-lock.json`)
+- Backend/data (product intent): Supabase, PostgreSQL, pgvector
+- Collaboration: Git + GitHub pull requests from a fork (do not push to
+  `EdTechForLearning/PREIShare-org-repo`)
+
+Do **not** switch the app to Next.js, Prisma, or another stack unless a human
+explicitly asks.
+
+**Verified gap:** this clone has **no** `supabase/` folder, **no**
+`src/lib/supabase.ts`, **no** `.env.example`, and **no** `.github/` workflows.
+Do not create those unless the human tasks it. `.cursorrules` mentions
+`lib/supabase.ts`; that path is **not found** — do not treat it as present.
+
+## Where to work (new contributors)
+
+Read `docs/onboarding/repo-map.md` and `docs/onboarding/team-orientation-notes.md`
+before editing (when those files exist in the checkout).
+
+Safe first surfaces (from the repo-map):
+
+- `docs/onboarding/`
+- `docs/` requirements briefs
+- `README.md`
+
+Avoid unless explicitly tasked:
+
+- `src/` app routes and components
+- `src/routeTree.gen.ts` (generated; never hand-edit)
+- `package.json` / `package-lock.json`
+- `vite.config.ts`, `tsconfig.json`
+- Auth, billing, database migrations, CI, `.env`, large dependency upgrades
+- Adding `src/lib/supabase.ts` or connecting live Supabase
+
+## How to change code
+
+- Prefer the smallest diff that completes the requested task
+- Match existing naming, file layout, and TypeScript style in neighboring files
+- Do not drive-by refactor unrelated modules
+- Do not add new libraries unless the human explicitly asks and justifies them
+- Do not invent npm scripts. Scripts that exist: `dev`, `build`, `preview`,
+  `generate-routes`
+
+## Secrets and safety
+
+- Never commit `.env`, API keys, tokens, or connection strings
+- Never print secrets into docs, rules, or chat logs
+- If a change needs configuration, document the variable **name** only
+  (for example `SUPABASE_URL`), not a real value
+- `.env` is gitignored; do not force-add it
+
+## Agent workflow
+
+- Restate the goal and list files you will touch before editing
+- Implement in small steps; stop for verification after each logical unit
+- When unsure about structure, consult `docs/onboarding/` rather than inventing paths
+- Before Start/Router/Devtools edits: `npx @tanstack/intent@latest list` then
+  `load` a matching skill (see `AGENTS.md`)
+
+## Out of scope defaults
+
+- No rewriting the entire app "for best practices" unprompted
+- No changing product requirements silently—flag product questions to the human
+- No treating a zip, screenshot, or view-only link as the PREIshare product

@@ -9,94 +9,84 @@ Before editing files for a substantial task:
 - Multiple matches: prefer the most specific local skill for the package or concern you are changing; load additional skills only when the task spans multiple packages or concerns.
 <!-- intent-skills:end -->
 
-# Project context
+# PREIshare — agent memory
 
-## Scaffold commands
+PREIshare is a real-estate intelligence product. It turns property facts and
+market data into a picture someone can use to decide what to do next with a
+building, neighborhood, or deal.
 
-Exact CLI used (initially created a nested folder, then merged into this repo root):
+This checkout is a **single npm package** at the repo root (`preishare-org-repo`),
+not an `apps/` + `packages/` monorepo. The running UI is a TanStack Start + React
+starter (`src/routes/` currently has `/` and `/about`).
 
-```bash
-npx @tanstack/cli@latest create my-tanstack-app --agent --package-manager npm --tailwind
-```
+**Standing rules:** `.cursor/rules/preishare.mdc` (always-on for Cursor-style
+agents). Root `.cursorrules` also exists; if they disagree, follow the repo-map
+and `preishare.mdc` (for example `lib/supabase.ts` is **not** in this tree).
 
-Notes from CLI:
-- `--tailwind` is deprecated/ignored; Tailwind is already enabled in the standard TanStack Start scaffold.
-- No partner add-ons were selected (`chosenAddOns: []`). Blank React Start starter only.
+## Onboarding docs
 
-Follow-up Intent commands (run from this repo root):
+Start here:
 
-```bash
-npx @tanstack/intent@latest install
-npx @tanstack/intent@latest list
-```
+- `docs/onboarding/team-orientation-notes.md` — mission, PR workflow, first-PR done
+- `docs/onboarding/repo-map.md` — verified folder map (safe vs do-not-edit-yet)
+- `docs/onboarding/setup-log.md` — fork, remotes, Git identity (when present)
 
-Result: 9 intent-enabled packages, 31 skills (Start, Router, Devtools, Virtual File Routes).
+Human onboarding lives under `docs/onboarding/`. Do not invent `apps/`,
+`packages/`, `backend/`, `supabase/`, or `.github/` — those paths were **not
+found** in the mapped clone.
 
-## Chosen stack
+## Stack (do not substitute)
 
-| Choice | Value |
-|--------|--------|
-| Framework | React 19 + TanStack Start |
-| Starter | Blank / default file-router preset |
+| Layer | This repo |
+| --- | --- |
+| Language | TypeScript (strict) |
+| App | TanStack Start + React |
+| Styling | Tailwind CSS v4 |
 | Package manager | npm |
-| Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
-| Toolchain | Vite 8 + TypeScript (default CLI toolchain) |
-| Router | TanStack Router file-based routes (`src/routes`) |
-| Integrations / add-ons | None |
+| Intended data platform | Supabase, PostgreSQL, pgvector (**not wired in this clone**) |
+| Collaboration | Fork + pull request; do not push to the team repo directly |
 
-## Layout (preserve unless there is a clear reason to change)
+Team repo of record: https://github.com/EdTechForLearning/PREIShare-org-repo
+
+## Layout that exists
 
 - `src/routes/` — file routes (`__root.tsx`, `index.tsx`, `about.tsx`)
-- `src/router.tsx` — router factory
+- `src/router.tsx` — router factory; `src/routeTree.gen.ts` is generated (do not edit)
 - `src/components/` — Header, Footer, ThemeToggle
-- `src/styles.css` — Tailwind entry
-- `vite.config.ts` — `devtools()`, `tailwindcss()`, `tanstackStart()`, `viteReact()`
-- `tsr.config.json` — route generation config
-- `.cta.json` — scaffold metadata
+- `src/lib/user.ts` — placeholder (`getUser()` returns `null`)
+- `src/styles.css` — Tailwind tokens
+- `vite.config.ts`, `tsconfig.json`, `tsr.config.json`, `package.json`
 
-Package name in `package.json` is `preishare-org-repo` (repo root). App lives at the repository root, not under `my-tanstack-app/`.
-
-## Environment variables
-
-None required for the blank scaffold.
-
-When adding secrets or config later (from `@tanstack/start-client-core#start-core/execution-model`):
-- **Server-only:** read `process.env.MY_SECRET` inside handlers / `createServerFn` / per-request code — never at module scope, never with a `VITE_` prefix.
-- **Client-exposed:** only `VITE_*` via `import.meta.env.VITE_*`.
-- Do not put secrets in `VITE_*` variables (they ship in the client bundle).
-- `.env` is gitignored.
-
-## Scripts
+## Scripts (from `package.json` only)
 
 ```bash
-npm install
-npm run dev      # Vite on port 3000
+npm run dev              # Vite on port 3000
 npm run build
 npm run preview
 npm run generate-routes
 ```
 
-## Deployment notes
+There is no `test`, `lint`, or `format` script in this manifest. Do not invent one.
 
-Blank scaffold has no host-specific adapter yet. TanStack Start deploys via Vite + Nitro (see `npx @tanstack/intent@latest load @tanstack/start-client-core#start-core/deployment`). Typical next step for Vercel/Node/Railway is adding the Nitro Vite plugin when you are ready to deploy.
+## Agent workflow
 
-## Architectural decisions
+1. Plan — restate the goal and files to touch.
+2. Smallest diff — match neighbors; no drive-by refactors; no extra libraries.
+3. Verify — re-read the change; do not commit secrets.
+4. Stop — if the tree disagrees with these notes, update `docs/onboarding/repo-map.md` rather than inventing paths.
 
-- Keep the generated structure; prefer Intent skills over guessing Start/Router APIs.
-- Isomorphic-by-default: use `createServerFn` / `createServerOnlyFn` / `createClientOnlyFn` for environment boundaries.
-- No auth, DB, or partner integrations in this blank app.
+Safe first-touch: `docs/onboarding/` and other `docs/` files. Do not edit `src/`,
+lockfiles, Vite/TS config, generated route tree, or `.env` unless explicitly tasked.
 
-## Known gotchas
+## Secrets and safety
 
-- CLI `--tailwind` flag is ignored (Tailwind is on by default).
-- Nested `my-tanstack-app/` from the create command was flattened into this repo root on purpose.
-- `intent install` keeps a short skill-loading block at the top of this file; durable project notes live below it.
-- Future Intent versions may require an explicit `intent.skills` allowlist.
+- Never commit `.env`, API keys, tokens, or connection strings
+- Never paste secrets into docs, rules, or chat
+- Name env vars only (example: `SUPABASE_URL`) — never real values
+- Do not connect live Supabase or add migrations until a human asks
 
-## Next steps
+## Environment (when config exists later)
 
-1. `npm run dev` and open http://localhost:3000
-2. Add routes under `src/routes/` as needed
-3. Load matching Intent skills before Start/Router/Devtools changes
-4. When deploying, load the deployment skill and add the appropriate Nitro/host preset
-5. Add `.env` / typed env declarations only when real config is introduced
+- Server-only secrets: `process.env.NAME` inside handlers / `createServerFn` — not at module scope, not with a `VITE_` prefix
+- Client-exposed: only `VITE_*` via `import.meta.env.VITE_*` (not secrets)
+- `.env` is gitignored
