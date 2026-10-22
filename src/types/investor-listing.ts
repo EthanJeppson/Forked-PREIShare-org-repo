@@ -35,8 +35,8 @@ export interface InvestorListingBase {
   /** Money summary including the asking price; may be missing while a listing is still being prepared. */
   financials?: FinancialSummary;
 
-  /** People investors can reach about this listing. */
-  contacts: InvestorContact[];
+  /** People investors can reach about this listing; at least one, since primaryContactId must point at one. */
+  contacts: [InvestorContact, ...InvestorContact[]];
 
   /**
    * Id of the main contact; must equal the `id` of one entry in `contacts`.
