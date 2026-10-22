@@ -10,6 +10,7 @@
     "generate-routes": "tsr generate",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
+    "typecheck:errors": "tsc --noEmit -p tsconfig.errors.json",
     "preview": "vite preview"
   },
   "dependencies": {
