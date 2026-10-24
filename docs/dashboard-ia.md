@@ -62,14 +62,12 @@ Details and boundaries live in `docs/component-plan.md`.
 
 ## Notes for later route files
 
-TanStack Start file routes in `src/routes/` (do not hand-edit `src/routeTree.gen.ts`):
+TanStack Start file routes in `src/routes/` (do not hand-edit `src/routeTree.gen.ts`). The exact file map lives in `docs/dashboard-routing-plan.md`; the folder form below is the one to follow.
 
 | File | URL | Role |
 |------|-----|------|
-| `src/routes/dashboard.tsx` | `/dashboard` (layout) | Parent layout. Renders `AppShell` around an `<Outlet />`. |
-| `src/routes/dashboard.index.tsx` | `/dashboard` | Overview page |
-| `src/routes/dashboard.portfolio.tsx` | `/dashboard/portfolio` | Portfolio page |
-| `src/routes/dashboard.deals.tsx` | `/dashboard/deals` | Deals page |
-| `src/routes/dashboard.profile.tsx` | `/dashboard/profile` | Profile page |
-
-If the generator or a later step prefers a `dashboard/` folder layout, the URLs and the parent-and-four-children shape in this table must not change.
+| `src/routes/dashboard/route.tsx` | `/dashboard` (layout) | Parent layout. Renders `AppShell` around an `<Outlet />`. |
+| `src/routes/dashboard/index.tsx` | `/dashboard` | Overview page |
+| `src/routes/dashboard/portfolio.tsx` | `/dashboard/portfolio` | Portfolio page |
+| `src/routes/dashboard/deals.tsx` | `/dashboard/deals` | Deals page |
+| `src/routes/dashboard/profile.tsx` | `/dashboard/profile` | Profile page |
