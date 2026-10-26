@@ -20,12 +20,16 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
 
   useEffect(() => {
     if (!open) return
+    const opener = document.activeElement
     closeButtonRef.current?.focus()
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      if (opener instanceof HTMLElement) opener.focus()
+    }
   }, [open, onClose])
 
   if (!open) return null

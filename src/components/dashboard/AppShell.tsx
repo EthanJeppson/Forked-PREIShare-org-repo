@@ -29,7 +29,7 @@ export function AppShell({ children }: AppShellProps) {
     navConfig.find((item) => item.to === currentPath)?.pageTitle ?? 'Dashboard'
 
   return (
-    <div className="page-wrap px-4 py-6">
+    <div className="page-wrap py-4 sm:px-4 sm:py-6">
       <div className="island-shell overflow-clip rounded-2xl">
         <Header pageTitle={pageTitle} onMenuClick={openMobileNav} />
         <div className="flex min-h-[60vh]">
