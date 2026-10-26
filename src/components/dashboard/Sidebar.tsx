@@ -20,11 +20,9 @@ export function Sidebar({ items }: SidebarProps) {
               <Link
                 to={item.to}
                 activeOptions={{ exact: true }}
-                className="block rounded-lg px-3 py-2 text-sm font-semibold text-[var(--sea-ink-soft)] no-underline hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-                activeProps={{
-                  className:
-                    'block rounded-lg px-3 py-2 text-sm font-semibold no-underline bg-[var(--chip-bg)] text-[var(--sea-ink)] border border-[var(--chip-line)]',
-                }}
+                className="block rounded-lg px-3 py-2 text-sm font-semibold no-underline"
+                activeProps={{ className: 'bg-[var(--chip-bg)] text-[var(--sea-ink)] border border-[var(--chip-line)]' }}
+                inactiveProps={{ className: 'text-[var(--sea-ink-soft)] hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]' }}
               >
                 {item.label}
               </Link>

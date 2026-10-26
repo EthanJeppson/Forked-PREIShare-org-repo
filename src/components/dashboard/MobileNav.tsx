@@ -64,11 +64,9 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
                   to={item.to}
                   activeOptions={{ exact: true }}
                   onClick={onClose}
-                  className="flex min-h-11 items-center rounded-lg px-3 text-base font-semibold text-[var(--sea-ink-soft)] no-underline hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-                  activeProps={{
-                    className:
-                      'flex min-h-11 items-center rounded-lg px-3 text-base font-semibold no-underline bg-[var(--chip-bg)] text-[var(--sea-ink)] border border-[var(--chip-line)]',
-                  }}
+                  className="flex min-h-11 items-center rounded-lg px-3 text-base font-semibold no-underline"
+                  activeProps={{ className: 'bg-[var(--chip-bg)] text-[var(--sea-ink)] border border-[var(--chip-line)]' }}
+                  inactiveProps={{ className: 'text-[var(--sea-ink-soft)] hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]' }}
                 >
                   {item.label}
                 </Link>
