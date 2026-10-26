@@ -27,7 +27,7 @@ Rules for this table:
 - **Shared chrome** on every `/dashboard/*` page: a navigation region (sidebar on desktop), a header, and a main content region. Only the main content region changes between pages.
 - **Four nav links, in this order:** Overview, Portfolio, Deals, Profile. No other links in the dashboard nav.
 - **Active state:** the link for the current URL is visibly marked. `/dashboard` matches only the exact path, so Overview is not highlighted on the other three pages.
-- **Narrow screens (about 375px):** the same four links stay reachable. The navigation collapses to a menu or moves to a top or bottom bar. There is no sideways scroll.
+- **Narrow screens (about 375px):** the same four links stay reachable. A menu button in the header opens a mobile navigation panel with the same four links. There is no sideways scroll.
 - **Mock labeling:** every page shows a visible "Mock data" badge in the header region.
 - **Leaving the dashboard:** `/` and `/about` stay as they are. Whether `/` links to `/dashboard` is an open question (see brief).
 
@@ -37,7 +37,7 @@ Details and boundaries live in `docs/component-plan.md`.
 
 | Page | Page widgets rendered in the main region |
 |------|-------------------------------------------|
-| Overview | `StatsCard` (3 to 4), `PortfolioSummary`, `RecentActivity` |
+| Overview | `MetricCard` (3 to 4), `PortfolioSummary`, `RecentActivity` |
 | Portfolio | `PortfolioTable` |
 | Deals | `DealsList` |
 | Profile | `ProfileCard` |
