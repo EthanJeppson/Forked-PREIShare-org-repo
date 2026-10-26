@@ -7,8 +7,11 @@ import { nitro } from 'nitro/vite'
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+import { appConfig } from './app.config'
+
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  server: { port: appConfig.devPort },
   plugins: [devtools(), tailwindcss(), tanstackStart(), nitro(), viteReact()],
 })
 

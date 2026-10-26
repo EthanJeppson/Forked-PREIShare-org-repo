@@ -1,187 +1,63 @@
-Welcome to your new TanStack Start app!
+# PREIshare Investor Dashboard Shell
 
-# Getting Started
+This is the starter project for the PREIshare investor dashboard (Sprint 3). It is a TanStack Start app written in TypeScript with React and Tailwind CSS. Right now it only has the starter pages, `/` and `/about`. The dashboard pages are added in a later step.
 
-To run this application:
+## What you need first
 
-```bash
-npm install
-npm run dev
-```
+- **Node.js (LTS version).** Check it by opening a terminal and typing `node -v`. If you see "command not found", install Node.js LTS from https://nodejs.org and open a new terminal.
+- **npm.** It comes with Node.js. Check it with `npm -v`.
 
-# Building For Production
+## Install and run
 
-To build this application for production:
+Run these commands in a terminal, from the project folder (the one that contains `package.json`).
 
-```bash
-npm run build
-```
+1. Install the libraries the app needs. This can take a minute and creates a `node_modules` folder:
 
-## Styling
+   ```bash
+   npm install
+   ```
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+2. Start the development server. It shows the app in your browser and reloads when you save a file:
 
-### Removing Tailwind CSS
+   ```bash
+   npm run dev
+   ```
 
-If you prefer not to use Tailwind CSS:
+3. Open http://localhost:3000 in your browser. You should see the starter home page.
+4. Press `Ctrl+C` in the terminal to stop the server.
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
+## Other commands
 
+| Command | What it does |
+| --- | --- |
+| `npm run build` | Builds the app for production. Use it to check that nothing is broken. |
+| `npm run typecheck` | Checks the TypeScript types without running the app. |
+| `npm run preview` | Serves the production build locally. Run `npm run build` first. |
 
+## What the main files are for
 
-## Routing
+| File | Job |
+| --- | --- |
+| `package.json` | Lists the app's scripts (such as `dev`) and the libraries it depends on. |
+| `tsconfig.json` | Turns on strict TypeScript checking. |
+| `app.config.ts` | App-level settings (app name and dev port). `vite.config.ts` reads it. |
+| `vite.config.ts` | Configures the build tool (Vite) and the TanStack Start, React and Tailwind plugins. |
+| `src/routes/__root.tsx` | The root layout. It wraps every page. |
+| `src/routes/index.tsx` | The home page at `/`. |
+| `src/routeTree.gen.ts` | Generated list of routes. Never edit it by hand. |
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
+## How pages work
 
-### Adding A Route
+Pages come from files in `src/routes/`. This is called file-based routing. A file named `src/routes/about.tsx` becomes the page at `/about`. When you add or rename a route file, the dev server regenerates `src/routeTree.gen.ts` for you.
 
-To add a new route to your application just add a new file in the `./src/routes` directory.
+## Planning docs
 
-TanStack will automatically generate the content of the route file for you.
+The plan for the dashboard lives in `docs/`:
 
-Now that you have two routes you can use a `Link` component to navigate between them.
+- `docs/investor-dashboard-brief.md`: what the dashboard must do and what is out of scope.
+- `docs/dashboard-ia.md`: the pages, URLs and navigation labels.
+- `docs/component-plan.md`: the components and what each one is responsible for.
 
-### Adding Links
+## What comes next
 
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+The dashboard routes (`/dashboard`, `/dashboard/portfolio`, `/dashboard/deals`, `/dashboard/profile`) and the layout components (`AppShell`, `Sidebar`, `Header` and the page widgets) are added in later steps. The shell uses mock data only: no sign-in, no database and no payments.
