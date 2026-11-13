@@ -90,3 +90,16 @@ export function getMockDeals(): InvestorListing[] {
     (listing) => listing.status === 'active' || listing.status === 'under_contract',
   )
 }
+
+/** MOCK-ONLY profile shape. Not a real account or session. */
+export type MockProfile = {
+  displayName: string
+  email: string
+  phone: string
+}
+
+export const MOCK_PROFILE: MockProfile = {
+  displayName: 'Alex Morgan (demo)',
+  email: 'alex.morgan@example.com',
+  phone: '+1-555-0100',
+}
