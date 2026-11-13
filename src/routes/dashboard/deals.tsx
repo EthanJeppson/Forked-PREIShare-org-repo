@@ -6,8 +6,9 @@ export const Route = createFileRoute('/dashboard/deals')({
 
 function DealsPage() {
   return (
-    <p className="m-0 max-w-prose text-base text-[var(--sea-ink-soft)]">
-      Placeholder for open deals. Mock data only; the deals list comes in a later step.
-    </p>
+    <main>
+      <h1 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">Deals</h1>
+      <p className="text-[var(--sea-ink-soft)]">Placeholder for open and past investment deals.</p>
+    </main>
   )
 }

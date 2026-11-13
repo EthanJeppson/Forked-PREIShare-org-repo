@@ -79,6 +79,11 @@ function App() {
             Edit <code>src/routes/index.tsx</code> to customize the home page.
           </li>
           <li>
+            Open the{' '}
+            <Link to="/dashboard">investor dashboard</Link> (placeholder
+            routes) at <code>/dashboard</code>.
+          </li>
+          <li>
             Update <code>src/components/Header.tsx</code> and{' '}
             <code>src/components/Footer.tsx</code> for brand links.
           </li>

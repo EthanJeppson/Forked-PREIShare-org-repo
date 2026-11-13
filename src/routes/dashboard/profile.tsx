@@ -6,8 +6,9 @@ export const Route = createFileRoute('/dashboard/profile')({
 
 function ProfilePage() {
   return (
-    <p className="m-0 max-w-prose text-base text-[var(--sea-ink-soft)]">
-      Placeholder for the investor profile card. Demo details only, not a signed-in account.
-    </p>
+    <main>
+      <h1 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">Profile</h1>
+      <p className="text-[var(--sea-ink-soft)]">Placeholder for investor profile details.</p>
+    </main>
   )
 }
