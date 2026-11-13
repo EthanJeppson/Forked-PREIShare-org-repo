@@ -66,7 +66,7 @@ TanStack Start file routes in `src/routes/` (do not hand-edit `src/routeTree.gen
 
 | File | URL | Role |
 |------|-----|------|
-| `src/routes/dashboard/route.tsx` | `/dashboard` (layout) | Parent layout. Renders `AppShell` around an `<Outlet />`. |
+| `src/routes/dashboard.tsx` | `/dashboard` (layout) | Parent layout. Renders `AppShell` around an `<Outlet />`. |
 | `src/routes/dashboard/index.tsx` | `/dashboard` | Overview page |
 | `src/routes/dashboard/portfolio.tsx` | `/dashboard/portfolio` | Portfolio page |
 | `src/routes/dashboard/deals.tsx` | `/dashboard/deals` | Deals page |
