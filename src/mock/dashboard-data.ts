@@ -1,5 +1,6 @@
 import type { ActivityItem } from '../components/dashboard/RecentActivity'
-import type { PropertyType } from '../types'
+import { sampleInvestorListings } from '../fixtures/sample-investor-listings'
+import type { InvestorListing, PropertyType } from '../types'
 
 /**
  * MOCK DATA ONLY. Placeholder numbers for the investor dashboard shell. None of
@@ -79,3 +80,13 @@ export const MOCK_HOLDINGS: ReadonlyArray<MockHolding> = [
   { id: 'holding-3', propertyName: 'Cedar Commercial Center', propertyType: 'commercial', value: 1950000 },
   { id: 'holding-4', propertyName: 'Harbor Business Park', propertyType: 'commercial', value: 1800000 },
 ]
+
+/**
+ * Mock open deals: the shared sample listings, kept to the investor-visible
+ * statuses (`active` and `under_contract`). Draft and closed listings stay out.
+ */
+export function getMockDeals(): InvestorListing[] {
+  return sampleInvestorListings.filter(
+    (listing) => listing.status === 'active' || listing.status === 'under_contract',
+  )
+}
