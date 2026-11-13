@@ -93,7 +93,7 @@ Each cycle names one file, one symptom and one breakpoint, and was followed by a
 
 - The site header and footer from `__root.tsx` still show above and below the dashboard, so there are two headers on every dashboard page. This is the open question in `docs/dashboard-routing-plan.md` and was not decided in this step. On mobile it adds about 115px above the dashboard header.
 - `/dashboard/portfolio`, `/dashboard/deals` and `/dashboard/profile` are not built yet, so those links show "Not Found" inside the shell. The shell, header title and navigation still work on them.
-- The "Open deals: 3" value is a hard-coded mock number and is not derived from the deals fixtures.
+- The "Open deals: 3" value was a hard-coded mock number when this run was done (2026-10-26). Since then it is computed from `getMockDeals()` and shows 2 (see `docs/verification-checklist.md`, D2).
 - At tablet width the third metric card sits alone on its row, and at desktop the Portfolio summary card has empty space under its content.
 - The MobileNav panel does not trap keyboard focus, and if it is open when the window is widened past 768px it stays open in state (it is hidden by CSS) and shows again if the window is narrowed.
 - Not tested: real devices, touch, Safari, Firefox, dark mode, screen readers, zoom.

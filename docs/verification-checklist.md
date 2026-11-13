@@ -114,7 +114,7 @@
 - **Skip link position.** The "Skip to main content" link is the 8th tab stop because it sits inside the dashboard shell, after the site header links.
 - **Deals shows 2 rows, brief says about 3 to 5.** Only two sample listings are investor-visible. Adding more means extending the shared Sprint 2 fixtures, which carry their own validation, so it was left alone.
 - **MobileNav does not trap focus** (already listed as a known limitation in `docs/responsive-qa-checklist.md`).
-- **Stale doc lines.** `docs/stakeholder-handoff-dashboard.md` and `docs/responsive-qa-checklist.md` still say "Open deals" is a hard-coded 3; that is no longer true after D2. They were not edited here; step 13 should correct them.
+- **Stale doc lines.** `docs/stakeholder-handoff-dashboard.md` and `docs/responsive-qa-checklist.md` still say "Open deals" is a hard-coded 3; that is no longer true after D2. They were not edited in this checklist's change; the handoff step corrected them (a superseded banner on the old handoff, and a dated note in the QA checklist).
 
 ---
 
