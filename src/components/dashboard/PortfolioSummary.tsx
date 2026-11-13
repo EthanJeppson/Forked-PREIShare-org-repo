@@ -1,47 +1,83 @@
-export type PortfolioSummaryProps = {
-  /** Already-formatted headline, for example "Total mock value: $4,200,000". */
-  headline: string
-  /** One short line per breakdown row, for example "Multifamily: 45%". */
-  summaryLines: ReadonlyArray<string>
-  /** Shown instead of the list when summaryLines is empty. */
-  emptyMessage: string
+export type HoldingSnapshot = {
+  id: string
+  name: string
+  allocationLabel: string
+  valueLabel: string
 }
 
-/**
- * Short portfolio snapshot. It shows a headline and a breakdown, not
- * individual holdings (that is the Portfolio page's table). Presentational
- * only: the Overview page passes everything in.
- */
+export type PortfolioSummaryProps = {
+  title?: string
+  totalLabel: string
+  holdings?: ReadonlyArray<HoldingSnapshot>
+  isSampleData?: boolean
+}
+
+export const MOCK_HOLDINGS: ReadonlyArray<HoldingSnapshot> = [
+  {
+    id: 'h1',
+    name: 'Sample Multifamily Fund A',
+    allocationLabel: '40%',
+    valueLabel: '$120,000',
+  },
+  {
+    id: 'h2',
+    name: 'Sample Industrial Note B',
+    allocationLabel: '35%',
+    valueLabel: '$105,000',
+  },
+  {
+    id: 'h3',
+    name: 'Sample Cash Reserve',
+    allocationLabel: '25%',
+    valueLabel: '$75,000',
+  },
+]
+
+/** Compact portfolio snapshot. Presentational only: no data fetching. */
 export function PortfolioSummary({
-  headline,
-  summaryLines,
-  emptyMessage,
+  title = 'Portfolio summary',
+  totalLabel,
+  holdings = MOCK_HOLDINGS,
+  isSampleData = true,
 }: PortfolioSummaryProps) {
   return (
     <section
-      aria-label="Portfolio summary"
+      aria-labelledby="portfolio-summary-heading"
       className="island-shell rounded-2xl p-4 sm:p-5"
     >
-      <p className="island-kicker m-0">Portfolio summary</p>
-      <h2 className="m-0 mt-2 break-words text-xl font-semibold text-[var(--sea-ink)]">
-        {headline}
+      <h2
+        id="portfolio-summary-heading"
+        className="m-0 text-xl font-semibold text-[var(--sea-ink)]"
+      >
+        {title}
       </h2>
-      {summaryLines.length === 0 ? (
-        <p className="m-0 mt-3 text-sm text-[var(--sea-ink-soft)]">
-          {emptyMessage}
+      {isSampleData ? (
+        <p
+          role="note"
+          className="m-0 mt-1 text-xs font-semibold text-[var(--sea-ink-soft)]"
+        >
+          Sample data: placeholders only, not live balances
         </p>
-      ) : (
-        <ul className="m-0 mt-3 list-none divide-y divide-[var(--line)] p-0">
-          {summaryLines.map((line) => (
-            <li
-              key={line}
-              className="py-2 text-sm text-[var(--sea-ink-soft)] first:pt-0 last:pb-0"
-            >
-              {line}
-            </li>
-          ))}
-        </ul>
-      )}
+      ) : null}
+      <p className="m-0 mt-3 flex items-baseline justify-between gap-3">
+        <span className="island-kicker">Total (sample)</span>
+        <span className="text-xl font-semibold text-[var(--sea-ink)]">
+          {totalLabel}
+        </span>
+      </p>
+      <ul className="m-0 mt-3 list-none divide-y divide-[var(--line)] p-0">
+        {holdings.map((item) => (
+          <li
+            key={item.id}
+            className="flex items-baseline justify-between gap-3 py-2 text-sm first:pt-0 last:pb-0"
+          >
+            <span className="min-w-0 text-[var(--sea-ink)]">{item.name}</span>
+            <span className="shrink-0 text-[var(--sea-ink-soft)]">
+              {item.allocationLabel} · {item.valueLabel}
+            </span>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

@@ -2,48 +2,82 @@ export type ActivityItem = {
   id: string
   title: string
   detail: string
-  /** Already-formatted date or time text. */
-  timestamp: string
+  /** Already-formatted date text. */
+  dateLabel: string
 }
 
 export type RecentActivityProps = {
-  items: ReadonlyArray<ActivityItem>
-  /** Shown instead of the list when items is empty. */
-  emptyMessage: string
+  title?: string
+  items?: ReadonlyArray<ActivityItem>
+  isSampleData?: boolean
 }
 
-/**
- * Plain list of recent events. Presentational only: no links, no navigation,
- * and no data of its own. The Overview page passes the items in.
- */
-export function RecentActivity({ items, emptyMessage }: RecentActivityProps) {
+export const MOCK_ACTIVITY: ReadonlyArray<ActivityItem> = [
+  {
+    id: 'a1',
+    title: 'Distribution posted (sample)',
+    detail: 'Sample Multifamily Fund A',
+    dateLabel: 'Mar 1, 2026',
+  },
+  {
+    id: 'a2',
+    title: 'Capital call notice (sample)',
+    detail: 'Sample Industrial Note B',
+    dateLabel: 'Feb 18, 2026',
+  },
+  {
+    id: 'a3',
+    title: 'Profile document uploaded (sample)',
+    detail: 'Accreditation letter',
+    dateLabel: 'Feb 5, 2026',
+  },
+]
+
+/** Short list of latest events. Presentational only: no data fetching. */
+export function RecentActivity({
+  title = 'Recent activity',
+  items = MOCK_ACTIVITY,
+  isSampleData = true,
+}: RecentActivityProps) {
   return (
     <section
-      aria-label="Recent activity"
+      aria-labelledby="recent-activity-heading"
       className="island-shell rounded-2xl p-4 sm:p-5"
     >
-      <p className="island-kicker m-0">Recent activity</p>
-      {items.length === 0 ? (
-        <p className="m-0 mt-3 text-sm text-[var(--sea-ink-soft)]">
-          {emptyMessage}
+      <h2
+        id="recent-activity-heading"
+        className="m-0 text-xl font-semibold text-[var(--sea-ink)]"
+      >
+        {title}
+      </h2>
+      {isSampleData ? (
+        <p
+          role="note"
+          className="m-0 mt-1 text-xs font-semibold text-[var(--sea-ink-soft)]"
+        >
+          Sample activity: not connected to a live feed
         </p>
-      ) : (
-        <ul className="m-0 mt-3 list-none divide-y divide-[var(--line)] p-0">
-          {items.map((item) => (
-            <li key={item.id} className="py-3 first:pt-0 last:pb-0">
-              <p className="m-0 text-xs text-[var(--sea-ink-soft)]">
-                {item.timestamp}
-              </p>
-              <p className="m-0 mt-0.5 text-sm font-semibold text-[var(--sea-ink)]">
+      ) : null}
+      <ol className="m-0 mt-3 list-none divide-y divide-[var(--line)] p-0">
+        {items.map((item) => (
+          <li
+            key={item.id}
+            className="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0"
+          >
+            <div className="min-w-0">
+              <p className="m-0 text-sm font-semibold text-[var(--sea-ink)]">
                 {item.title}
               </p>
               <p className="m-0 mt-0.5 text-sm text-[var(--sea-ink-soft)]">
                 {item.detail}
               </p>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+            <span className="shrink-0 text-xs text-[var(--sea-ink-soft)]">
+              {item.dateLabel}
+            </span>
+          </li>
+        ))}
+      </ol>
     </section>
   )
 }
