@@ -5,7 +5,7 @@ export type ProfileCardProps = {
 }
 
 /**
- * Read-only member card: name, email, and phone. Presentational only: no edit,
+ * Read-only member card: name, email, phone, membership, preferred contact, and notes. Presentational only: no edit,
  * save, password, or sign-in controls.
  */
 export function ProfileCard({ profile }: ProfileCardProps) {
@@ -13,6 +13,9 @@ export function ProfileCard({ profile }: ProfileCardProps) {
     { label: 'Name', value: profile.displayName },
     { label: 'Email', value: profile.email },
     { label: 'Phone', value: profile.phone },
+    { label: 'Membership', value: profile.membershipTier },
+    { label: 'Preferred contact', value: profile.preferredContact },
+    { label: 'Notes', value: profile.notes },
   ]
 
   return (
@@ -29,7 +32,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
       <p className="m-0 mt-1 text-xs font-semibold text-[var(--sea-ink-soft)]">
         Demo details only, not a signed-in account
       </p>
-      <dl className="m-0 mt-3 grid gap-3 sm:grid-cols-3">
+      <dl className="m-0 mt-3 grid gap-3 sm:grid-cols-2">
         {fields.map((field) => (
           <div key={field.label} className="min-w-0">
             <dt className="island-kicker">{field.label}</dt>

@@ -8,7 +8,7 @@ export type PortfolioTableProps = {
 }
 
 /**
- * Mock holdings table: property, type, and value. Presentational only. The
+ * Mock holdings table: property, type, invested, current value, and status. Presentational only. The
  * Portfolio page passes the rows in. No sorting, filtering, or editing.
  */
 export function PortfolioTable({ holdings, emptyMessage }: PortfolioTableProps) {
@@ -32,7 +32,7 @@ export function PortfolioTable({ holdings, emptyMessage }: PortfolioTableProps) 
         </p>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="w-full min-w-[28rem] border-collapse text-left text-sm">
+          <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-[var(--line)] text-[var(--sea-ink-soft)]">
                 <th scope="col" className="py-2 pr-3 font-semibold">
@@ -41,8 +41,14 @@ export function PortfolioTable({ holdings, emptyMessage }: PortfolioTableProps) 
                 <th scope="col" className="py-2 pr-3 font-semibold">
                   Type
                 </th>
-                <th scope="col" className="py-2 text-right font-semibold">
-                  Value
+                <th scope="col" className="py-2 pr-3 text-right font-semibold">
+                  Invested
+                </th>
+                <th scope="col" className="py-2 pr-3 text-right font-semibold">
+                  Current value
+                </th>
+                <th scope="col" className="py-2 font-semibold">
+                  Status
                 </th>
               </tr>
             </thead>
@@ -61,8 +67,16 @@ export function PortfolioTable({ holdings, emptyMessage }: PortfolioTableProps) 
                   <td className="py-3 pr-3 text-[var(--sea-ink-soft)]">
                     {formatPropertyType(row.propertyType)}
                   </td>
-                  <td className="py-3 text-right text-[var(--sea-ink)]">
-                    {formatCurrency(row.value)}
+                  <td className="py-3 pr-3 text-right text-[var(--sea-ink-soft)]">
+                    {formatCurrency(row.investedAmount)}
+                  </td>
+                  <td className="py-3 pr-3 text-right text-[var(--sea-ink)]">
+                    {formatCurrency(row.currentValue)}
+                  </td>
+                  <td className="py-3">
+                    <span className="rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--sea-ink)]">
+                      {row.status}
+                    </span>
                   </td>
                 </tr>
               ))}

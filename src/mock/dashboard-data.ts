@@ -65,20 +65,25 @@ export const MOCK_RECENT_ACTIVITY: ReadonlyArray<ActivityItem> = [
  * MOCK-ONLY holdings shape. Portfolio holdings have no real type yet
  * (docs/investor-dashboard-brief.md), so this small shape is local to the mock.
  */
+export type HoldingStatus = 'Performing' | 'Under review' | 'Exited'
+
 export type MockHolding = {
   id: string
   propertyName: string
   propertyType: PropertyType
-  /** Whole US dollars. */
-  value: number
+  /** Whole US dollars put in. */
+  investedAmount: number
+  /** Whole US dollars today. */
+  currentValue: number
+  status: HoldingStatus
 }
 
-/** Four mock holdings that add up to the $6,850,000 mock total on Overview. */
+/** Four mock holdings whose current values add up to the $6,850,000 mock total on Overview. */
 export const MOCK_HOLDINGS: ReadonlyArray<MockHolding> = [
-  { id: 'holding-1', propertyName: 'Riverfront Lofts', propertyType: 'multi_family', value: 2000000 },
-  { id: 'holding-2', propertyName: 'Maple Court Apartments', propertyType: 'multi_family', value: 1100000 },
-  { id: 'holding-3', propertyName: 'Cedar Commercial Center', propertyType: 'commercial', value: 1950000 },
-  { id: 'holding-4', propertyName: 'Harbor Business Park', propertyType: 'commercial', value: 1800000 },
+  { id: 'holding-1', propertyName: 'Riverfront Lofts', propertyType: 'multi_family', investedAmount: 1800000, currentValue: 2000000, status: 'Performing' },
+  { id: 'holding-2', propertyName: 'Maple Court Apartments', propertyType: 'multi_family', investedAmount: 1150000, currentValue: 1100000, status: 'Under review' },
+  { id: 'holding-3', propertyName: 'Cedar Commercial Center', propertyType: 'commercial', investedAmount: 1700000, currentValue: 1950000, status: 'Performing' },
+  { id: 'holding-4', propertyName: 'Harbor Business Park', propertyType: 'commercial', investedAmount: 1800000, currentValue: 1800000, status: 'Performing' },
 ]
 
 /**
@@ -96,10 +101,16 @@ export type MockProfile = {
   displayName: string
   email: string
   phone: string
+  membershipTier: string
+  preferredContact: string
+  notes: string
 }
 
 export const MOCK_PROFILE: MockProfile = {
   displayName: 'Alex Morgan (demo)',
   email: 'alex.morgan@example.com',
   phone: '+1-555-0100',
+  membershipTier: 'Preferred investor (demo)',
+  preferredContact: 'Email',
+  notes: 'Interested in multi-family and commercial deals. Demo text, not a real preference.',
 }
