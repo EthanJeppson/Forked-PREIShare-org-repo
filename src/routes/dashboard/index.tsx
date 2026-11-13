@@ -16,6 +16,7 @@ export const Route = createFileRoute('/dashboard/')({
 function DashboardHome() {
   return (
     <div className="flex flex-col gap-6">
+      <h2 className="m-0 text-xl font-semibold text-[var(--sea-ink)]">Dashboard overview</h2>
       <p className="m-0 max-w-prose text-base text-[var(--sea-ink-soft)]">
         Your PREIshare home base for portfolio value, open deals and recent
         activity. Every number on this page is mock data.
