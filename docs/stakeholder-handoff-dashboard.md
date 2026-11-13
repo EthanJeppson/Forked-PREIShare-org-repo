@@ -1,5 +1,7 @@
 # PREIshare Investor Dashboard — Stakeholder Handoff
 
+> **Superseded.** This is a snapshot from 2026-10-26, written when only the Overview page existed. Portfolio, Deals and Profile are now built, and "Open deals" is computed from the Deals fixtures (it shows 2, not 3). Use [`docs/sprint3-handoff.md`](sprint3-handoff.md) for the current state. The text below is kept unchanged as history.
+
 **Sprint focus:** Responsive investor dashboard shell (TanStack Start routes and React UI), mock data only
 **Audience:** PREIshare product stakeholders and the owners of the next implementation topics
 **Date:** 2026-10-26
