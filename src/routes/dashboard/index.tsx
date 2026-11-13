@@ -23,7 +23,7 @@ function DashboardHome() {
 
       <section
         aria-label="Key metrics"
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+        className="dashboard-card-grid"
       >
         {MOCK_OVERVIEW_METRICS.map((metric) => (
           <MetricCard

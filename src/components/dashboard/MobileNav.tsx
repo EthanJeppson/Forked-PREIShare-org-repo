@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import type { NavItem } from './nav-config'
 
+/** id of the open panel; the Header menu button points at it with aria-controls. */
+export const MOBILE_NAV_ID = 'dashboard-mobile-nav'
+
 export type MobileNavProps = {
   /** Links to show, from navConfig. Same list Sidebar gets. */
   items: ReadonlyArray<NavItem>
@@ -13,7 +16,8 @@ export type MobileNavProps = {
 
 /**
  * Small-screen navigation panel, opened by the Header menu button.
- * Hidden at 768px and wider. It owns no open/closed state.
+ * Hidden at 768px and wider. It owns no open/closed state. It stays mounted
+ * while closed (hidden) so the menu button's aria-controls always points at it.
  */
 export function MobileNav({ items, open, onClose }: MobileNavProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -32,10 +36,8 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
     }
   }, [open, onClose])
 
-  if (!open) return null
-
   return (
-    <div className="fixed inset-0 z-[60] md:hidden">
+    <div hidden={!open} className="fixed inset-0 z-[60] md:hidden">
       <button
         type="button"
         tabIndex={-1}
@@ -44,6 +46,7 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
         className="absolute inset-0 h-full w-full cursor-default border-0 bg-black/40 p-0"
       />
       <div
+        id={MOBILE_NAV_ID}
         role="dialog"
         aria-modal="true"
         aria-label="Dashboard navigation menu"
