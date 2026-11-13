@@ -1,4 +1,5 @@
 import type { ActivityItem } from '../components/dashboard/RecentActivity'
+import type { PropertyType } from '../types'
 
 /**
  * MOCK DATA ONLY. Placeholder numbers for the investor dashboard shell. None of
@@ -57,4 +58,24 @@ export const MOCK_RECENT_ACTIVITY: ReadonlyArray<ActivityItem> = [
     title: 'Quarterly report available',
     detail: 'Mock report for the retail holding is ready to read.',
   },
+]
+
+/**
+ * MOCK-ONLY holdings shape. Portfolio holdings have no real type yet
+ * (docs/investor-dashboard-brief.md), so this small shape is local to the mock.
+ */
+export type MockHolding = {
+  id: string
+  propertyName: string
+  propertyType: PropertyType
+  /** Whole US dollars. */
+  value: number
+}
+
+/** Four mock holdings that add up to the $6,850,000 mock total on Overview. */
+export const MOCK_HOLDINGS: ReadonlyArray<MockHolding> = [
+  { id: 'holding-1', propertyName: 'Riverfront Lofts', propertyType: 'multi_family', value: 2000000 },
+  { id: 'holding-2', propertyName: 'Maple Court Apartments', propertyType: 'multi_family', value: 1100000 },
+  { id: 'holding-3', propertyName: 'Cedar Commercial Center', propertyType: 'commercial', value: 1950000 },
+  { id: 'holding-4', propertyName: 'Harbor Business Park', propertyType: 'commercial', value: 1800000 },
 ]
