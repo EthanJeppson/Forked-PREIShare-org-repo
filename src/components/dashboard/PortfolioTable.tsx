@@ -31,7 +31,7 @@ export function PortfolioTable({ holdings, emptyMessage }: PortfolioTableProps) 
           {emptyMessage}
         </p>
       ) : (
-        <div className="mt-3 overflow-x-auto">
+        <div className="dashboard-table-wrap mt-3">
           <table className="w-full min-w-[28rem] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-[var(--line)] text-[var(--sea-ink-soft)]">
