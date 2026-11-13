@@ -3,7 +3,7 @@ import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
 type AppShellProps = {
-  title?: string
+  title?: string | undefined
   children: ReactNode
 }
 
@@ -11,10 +11,7 @@ type AppShellProps = {
  * Shared investor chrome: sidebar, header, and a main region.
  * Child routes render inside `children`.
  */
-export function AppShell({
-  title = 'Investor Dashboard',
-  children,
-}: AppShellProps) {
+export function AppShell({ title, children }: AppShellProps) {
   return (
     <div className="page-wrap py-4 sm:px-4 sm:py-6">
       <div className="island-shell flex min-h-[60vh] overflow-clip rounded-2xl">
