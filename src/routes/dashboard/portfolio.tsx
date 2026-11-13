@@ -1,4 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { PortfolioTable } from '../../components/dashboard/PortfolioTable'
+import { MOCK_HOLDINGS } from '../../mock/dashboard-data'
 
 export const Route = createFileRoute('/dashboard/portfolio')({
   component: PortfolioPage,
@@ -6,8 +8,9 @@ export const Route = createFileRoute('/dashboard/portfolio')({
 
 function PortfolioPage() {
   return (
-    <p className="m-0 max-w-prose text-base text-[var(--sea-ink-soft)]">
-      Placeholder for holdings and performance. Mock data only; the holdings table comes in a later step.
-    </p>
+    <PortfolioTable
+      holdings={MOCK_HOLDINGS}
+      emptyMessage="No holdings to show yet. Investments you make will appear here."
+    />
   )
 }
