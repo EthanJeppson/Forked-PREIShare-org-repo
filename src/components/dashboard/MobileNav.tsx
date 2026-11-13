@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import type { NavItem } from './nav-config'
 
+/** id of the open panel; the Header menu button points at it with aria-controls. */
+export const MOBILE_NAV_ID = 'dashboard-mobile-nav'
+
 export type MobileNavProps = {
   /** Links to show, from navConfig. Same list Sidebar gets. */
   items: ReadonlyArray<NavItem>
@@ -44,6 +47,7 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
         className="absolute inset-0 h-full w-full cursor-default border-0 bg-black/40 p-0"
       />
       <div
+        id={MOBILE_NAV_ID}
         role="dialog"
         aria-modal="true"
         aria-label="Dashboard navigation menu"

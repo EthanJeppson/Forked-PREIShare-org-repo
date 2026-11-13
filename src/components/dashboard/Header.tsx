@@ -1,8 +1,12 @@
+import { MOBILE_NAV_ID } from './MobileNav'
+
 export type HeaderProps = {
   /** Title of the current dashboard page, shown next to the brand. */
   pageTitle: string
   /** Called when the small-screen menu button is pressed. The button is hidden when this is not passed. */
   onMenuClick?: () => void
+  /** Whether the small-screen menu is open. Reported to assistive tech on the menu button. */
+  menuOpen?: boolean
 }
 
 /**
@@ -10,7 +14,7 @@ export type HeaderProps = {
  * a "Mock data" badge, and a demo user placeholder. It holds no session or
  * auth state and renders no navigation links.
  */
-export function Header({ pageTitle, onMenuClick }: HeaderProps) {
+export function Header({ pageTitle, onMenuClick, menuOpen = false }: HeaderProps) {
   return (
     <header className="flex items-center justify-between gap-3 border-b border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3">
       <div className="flex min-w-0 items-center gap-3">
@@ -19,7 +23,10 @@ export function Header({ pageTitle, onMenuClick }: HeaderProps) {
             type="button"
             onClick={onMenuClick}
             aria-label="Open navigation menu"
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls={menuOpen ? MOBILE_NAV_ID : undefined}
+            aria-haspopup="dialog"
+            className="inline-flex h-11 min-w-11 shrink-0 px-3 text-sm font-semibold items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] md:hidden"
           >
             <span aria-hidden="true">Menu</span>
           </button>
