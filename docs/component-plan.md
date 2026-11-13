@@ -26,7 +26,7 @@ Planned location: `src/components/dashboard/` (one file per component). The mock
 
 | Component | Responsibility | Used on | Must NOT do |
 |-----------|----------------|---------|-------------|
-| `AppShell` | Frame for every dashboard page: places `Header`, `Sidebar`, `MobileNav`, and the main content region (children); owns the `MobileNav` open state and picks the page title | `src/routes/dashboard/route.tsx`, wrapping all four pages | Render page widgets; define nav labels; fetch data |
+| `AppShell` | Frame for every dashboard page: places `Header`, `Sidebar`, `MobileNav`, and the main content region (children); owns the `MobileNav` open state and picks the page title | `src/routes/dashboard.tsx`, wrapping all four pages | Render page widgets; define nav labels; fetch data |
 | `Sidebar` | Render the four links from the `items` it is given and mark the active one; shown on tablet and desktop only | `AppShell` | Define labels or paths; show on mobile; render page titles; contain deal, holding, or profile content |
 | `MobileNav` | Render the same four links in a slide-over panel on small screens, controlled by `open` and `onClose` from `AppShell` | `AppShell` | Own the open state; define labels or paths; show on tablet or desktop |
 | `Header` | Show the product name, the `pageTitle` it is given, the "Mock data" badge, and the menu button on small screens | `AppShell` | Render navigation links; decide the page title; own the open state; fetch data |
