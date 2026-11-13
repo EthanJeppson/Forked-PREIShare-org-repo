@@ -27,7 +27,7 @@ export const MOCK_OVERVIEW_METRICS: ReadonlyArray<MockMetric> = [
   },
   {
     label: 'Open deals',
-    value: '3',
+    value: String(getMockDeals().length),
     hint: 'Active or under contract (mock count)',
   },
 ]
@@ -36,8 +36,7 @@ export const MOCK_PORTFOLIO_SUMMARY_HEADLINE = 'Total mock value: $6,850,000'
 
 export const MOCK_PORTFOLIO_SUMMARY_LINES: ReadonlyArray<string> = [
   'Multi-family: $3,100,000 (45%)',
-  'Retail: $1,950,000 (28%)',
-  'Industrial: $1,800,000 (27%)',
+  'Commercial: $3,750,000 (55%)',
 ]
 
 export const MOCK_RECENT_ACTIVITY: ReadonlyArray<ActivityItem> = [
@@ -57,7 +56,7 @@ export const MOCK_RECENT_ACTIVITY: ReadonlyArray<ActivityItem> = [
     id: 'activity-3',
     timestamp: 'Mar 11, 2026',
     title: 'Quarterly report available',
-    detail: 'Mock report for the retail holding is ready to read.',
+    detail: 'Mock report for a commercial holding is ready to read.',
   },
 ]
 
