@@ -36,7 +36,7 @@ export function AppShell({ children }: AppShellProps) {
       <div className="island-shell overflow-clip rounded-2xl">
         <Header
           pageTitle={pageTitle}
-          onMenuClick={openMobileNav}
+          onMenuClick={mobileNavOpen ? closeMobileNav : openMobileNav}
           menuOpen={mobileNavOpen}
         />
         <div className="flex min-h-[60vh]">

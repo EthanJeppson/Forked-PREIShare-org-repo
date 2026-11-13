@@ -3,7 +3,7 @@ import { MOBILE_NAV_ID } from './MobileNav'
 export type HeaderProps = {
   /** Title of the current dashboard page, shown next to the brand. */
   pageTitle: string
-  /** Called when the small-screen menu button is pressed. The button is hidden when this is not passed. */
+  /** Called when the small-screen menu button is pressed (it opens or closes the menu). The button is hidden when this is not passed. */
   onMenuClick?: () => void
   /** Whether the small-screen menu is open. Reported to assistive tech on the menu button. */
   menuOpen?: boolean
@@ -22,7 +22,7 @@ export function Header({ pageTitle, onMenuClick, menuOpen = false }: HeaderProps
           <button
             type="button"
             onClick={onMenuClick}
-            aria-label="Open navigation menu"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={menuOpen}
             aria-controls={MOBILE_NAV_ID}
             aria-haspopup="dialog"
