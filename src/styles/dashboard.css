@@ -1,9 +1,34 @@
 /*
-  Shared accessibility polish for the investor dashboard shell. Layout and
-  breakpoints (sidebar at 768px and up, MobileNav below it, card grids) are
-  Tailwind utilities on the components; this file holds what utilities do not
-  cover. Everything is scoped to .dashboard-shell, the root class on AppShell.
+  Shared responsive and accessibility rules for the investor dashboard shell.
+  The sidebar (768px and up) and MobileNav (below it) are Tailwind utilities on
+  the components; this file holds the shared card grid, table scroll wrapper,
+  and accessibility polish. Scoped to .dashboard-shell, the root class on AppShell.
 */
+
+/* Card grid: 1 column on narrow screens, 2 from 640px, 3 from 1280px. */
+.dashboard-shell .dashboard-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .dashboard-shell .dashboard-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .dashboard-shell .dashboard-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Wide tables scroll inside their container instead of stretching the page. */
+.dashboard-shell .dashboard-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
 
 .dashboard-shell a:focus-visible,
 .dashboard-shell button:focus-visible {

@@ -24,7 +24,7 @@ export function Header({ pageTitle, onMenuClick, menuOpen = false }: HeaderProps
             onClick={onMenuClick}
             aria-label="Open navigation menu"
             aria-expanded={menuOpen}
-            aria-controls={menuOpen ? MOBILE_NAV_ID : undefined}
+            aria-controls={MOBILE_NAV_ID}
             aria-haspopup="dialog"
             className="inline-flex h-11 min-w-11 shrink-0 px-3 text-sm font-semibold items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] md:hidden"
           >

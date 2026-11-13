@@ -16,7 +16,8 @@ export type MobileNavProps = {
 
 /**
  * Small-screen navigation panel, opened by the Header menu button.
- * Hidden at 768px and wider. It owns no open/closed state.
+ * Hidden at 768px and wider. It owns no open/closed state. It stays mounted
+ * while closed (hidden) so the menu button's aria-controls always points at it.
  */
 export function MobileNav({ items, open, onClose }: MobileNavProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -35,10 +36,8 @@ export function MobileNav({ items, open, onClose }: MobileNavProps) {
     }
   }, [open, onClose])
 
-  if (!open) return null
-
   return (
-    <div className="fixed inset-0 z-[60] md:hidden">
+    <div hidden={!open} className="fixed inset-0 z-[60] md:hidden">
       <button
         type="button"
         tabIndex={-1}
