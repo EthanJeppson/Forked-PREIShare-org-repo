@@ -51,12 +51,8 @@ function requiredText(label: string, max: number) {
 const fields = {
   title: requiredText('Title', 200),
   summary: requiredText('Summary', 5000),
-  property_type: z.enum(PROPERTY_TYPES, {
-    error: `Property type must be one of: ${PROPERTY_TYPES.join(', ')}`,
-  }),
-  status: z.enum(LISTING_STATUSES, {
-    error: `Status must be one of: ${LISTING_STATUSES.join(', ')}`,
-  }),
+  property_type: z.enum(PROPERTY_TYPES, { error: 'Choose a property type' }),
+  status: z.enum(LISTING_STATUSES, { error: 'Choose a status' }),
   address_line1: requiredText('Address', 300),
   address_line2: z
     .string({ error: 'Address line 2 must be text' })

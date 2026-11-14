@@ -78,7 +78,7 @@ function databaseFailure(
   return {
     ok: false as const,
     code: 'database' as const,
-    error: `Could not ${action}. Check your input and try again.`,
+    error: `Could not ${action}. Try again.`,
   }
 }
 
