@@ -24,7 +24,7 @@ The requirements are in `docs/investor-dashboard-brief.md`. The decisions behind
 | `/dashboard/portfolio` | `src/routes/dashboard/portfolio.tsx` | Portfolio: a table of four mock holdings |
 | `/dashboard/deals` | `src/routes/dashboard/deals.tsx` | Deals: the investor-visible sample listings (`active` and `under_contract` only) |
 | `/dashboard/profile` | `src/routes/dashboard/profile.tsx` | Profile: a demo profile card |
-| (layout for all of the above) | `src/routes/dashboard.tsx` | Wraps every `/dashboard/*` page in `AppShell` |
+| (layout for all of the above) | `src/routes/dashboard/route.tsx` | Wraps every `/dashboard/*` page in `AppShell` (it was `src/routes/dashboard.tsx` in Sprint 3; moved in Sprint 4, same URLs) |
 
 `/` and `/about` are the original starter pages. `/` now has an "Open investor dashboard" link to `/dashboard`. There is no separate activity page; recent activity is a list on Overview.
 
@@ -117,7 +117,7 @@ Be direct about these when handing off.
 **Repo housekeeping**
 
 - **Do-not-merge PRs.** The lesson-variant PRs [#28](https://github.com/EthanJeppson/Forked-PREIShare-org-repo/pull/28), [#29](https://github.com/EthanJeppson/Forked-PREIShare-org-repo/pull/29), [#30](https://github.com/EthanJeppson/Forked-PREIShare-org-repo/pull/30), [#31](https://github.com/EthanJeppson/Forked-PREIShare-org-repo/pull/31) and [#33](https://github.com/EthanJeppson/Forked-PREIShare-org-repo/pull/33) duplicate or regress code that is already on the default branch. They are marked do-not-merge and can be closed.
-- **Scaffold names differ from this repo.** Early lesson wording used `src/components/layout/`, `navConfig.ts`, `StatsCard`, "Home" and `dashboard/route.tsx`. The repo follows the planning docs instead: `src/components/dashboard/`, `nav-config.ts`, `MetricCard`, "Overview" and `src/routes/dashboard.tsx`.
+- **Scaffold names differ from this repo.** Early lesson wording used `src/components/layout/`, `navConfig.ts`, `StatsCard`, "Home" and `dashboard/route.tsx`. In Sprint 3 the repo followed the planning docs instead: `src/components/dashboard/`, `nav-config.ts`, `MetricCard`, "Overview" and a layout in `src/routes/dashboard.tsx`. Sprint 4 moved that layout to `src/routes/dashboard/route.tsx` (the lesson's path); the other names are unchanged.
 
 ## Next-sprint recommendations
 

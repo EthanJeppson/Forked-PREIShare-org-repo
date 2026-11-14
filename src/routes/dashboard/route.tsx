@@ -5,9 +5,9 @@ import {
   redirect,
   useNavigate,
 } from '@tanstack/react-router'
-import { AppShell } from '../components/dashboard/AppShell'
-import { getUser, signOut } from '../lib/auth/session'
-import { createBrowserSupabaseClient } from '../lib/supabase/client'
+import { AppShell } from '../../components/dashboard/AppShell'
+import { getUser, signOut } from '../../lib/auth/session'
+import { createBrowserSupabaseClient } from '../../lib/supabase/client'
 
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: async () => {
