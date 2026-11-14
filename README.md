@@ -52,7 +52,7 @@ There is no test runner and no lint script in this project yet.
 | `vite.config.ts` | Configures the build tool (Vite) and the TanStack Start, React and Tailwind plugins. |
 | `src/routes/__root.tsx` | The root layout. It wraps every page. |
 | `src/routes/index.tsx` | The home page at `/`. |
-| `src/routes/dashboard.tsx` | The dashboard layout. It wraps every `/dashboard/*` page in `AppShell`. |
+| `src/routes/dashboard/route.tsx` | The dashboard layout. It wraps every `/dashboard/*` page in `AppShell`. |
 | `src/routes/dashboard/` | The four dashboard pages: `index.tsx` (Overview), `portfolio.tsx`, `deals.tsx`, `profile.tsx`. |
 | `src/components/dashboard/` | The dashboard shell and widgets (`AppShell`, `Sidebar`, `MobileNav`, `Header`, `nav-config.ts`, and the page widgets). |
 | `src/mock/dashboard-data.ts` | All dashboard mock data. Exports are named `MOCK_*`, `Mock*` or `getMock*`. |
