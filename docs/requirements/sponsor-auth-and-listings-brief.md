@@ -62,7 +62,7 @@ Taken from `main` at `d8e9eab` (PR #38 merged). Sources: [`../sprint3-handoff.md
 | --- | --- | --- |
 | `/` | `src/routes/index.tsx` | Starter home page with an "Open investor dashboard" link to `/dashboard` |
 | `/about` | `src/routes/about.tsx` | Starter about page |
-| (layout for `/dashboard/*`) | `src/routes/dashboard.tsx` | Wraps every dashboard page in `AppShell`. Has no guard. |
+| (layout for `/dashboard/*`) | `src/routes/dashboard.tsx` (now `src/routes/dashboard/route.tsx`) | Wraps every dashboard page in `AppShell`. Had no guard when this brief was written. |
 | `/dashboard` | `src/routes/dashboard/index.tsx` | Overview: three metric cards, portfolio summary, recent activity |
 | `/dashboard/portfolio` | `src/routes/dashboard/portfolio.tsx` | Table of four mock holdings |
 | `/dashboard/deals` | `src/routes/dashboard/deals.tsx` | Investor-visible sample listings (`active` and `under_contract` only) |
@@ -80,7 +80,7 @@ There is no sign-in page, no sign-up page and no listing-create page. `src/route
 
 **Existing decisions this sprint builds on (do not re-decide silently):**
 
-- The `/dashboard` layout route (D1) (`src/routes/dashboard.tsx`) is the one place to guard the dashboard.
+- The `/dashboard` layout route (D1) (`src/routes/dashboard/route.tsx`) is the one place to guard the dashboard.
 - `AppShell` / `Header` are the one place for the user label (D2).
 - Widgets in `src/components/dashboard/` take props and do not fetch (D4). Data loading belongs in route files (loader or `createServerFn`).
 - Listing status values are spelled exactly as in `src/types/listing-status.ts`: `draft`, `active`, `under_contract`, `closed`.

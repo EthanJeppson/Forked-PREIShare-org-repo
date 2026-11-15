@@ -29,7 +29,7 @@
 | R6 | `/dashboard/` (trailing slash) works | Pass | HTTP 200, `<h1>` "Overview". |
 | R7 | `/` and `/about` still work; home links into the dashboard | Pass | `/` 200 with an "Open investor dashboard" link to `/dashboard`; `/about` 200. |
 
-**IA notes:** Routes and URLs match `docs/dashboard-ia.md` exactly, and there is no activity page (activity is a widget on Overview). The layout file is `src/routes/dashboard.tsx` (the IA doc and routing plan were updated to that path).
+**IA notes:** Routes and URLs match `docs/dashboard-ia.md` exactly, and there is no activity page (activity is a widget on Overview). The layout file is `src/routes/dashboard/route.tsx`. It was `src/routes/dashboard.tsx` when this was tested and moved in Sprint 4 with no change to any URL.
 
 ---
 
