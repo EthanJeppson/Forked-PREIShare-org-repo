@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
-import { ListingForm } from '../../../components/listings/ListingForm'
+import { ListingForm } from '../../components/listings/ListingForm'
 import type {
   ListingFieldErrors,
   ListingFormValues,
-} from '../../../lib/listings/schema'
-import { createListing } from '../../../server/listings'
+} from '../../lib/listings/schema'
+import { createListing } from '../../server/listings'
 
-export const Route = createFileRoute('/dashboard/listings/new')({
+// The form never sends an owner. createListing (src/server/listings.ts) runs on
+// the server, reads the session, sets owner_id from it, and inserts with the
+// server client from src/lib/supabase.server.ts, so RLS WITH CHECK
+// (owner_id = auth.uid()) must also pass. This page navigates to the list only
+// after result.ok; every failure stays on the form with a visible error.
+export const Route = createFileRoute('/dashboard/properties/new')({
   component: NewListingPage,
 })
 
