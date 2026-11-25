@@ -26,7 +26,7 @@ function NewListingPage() {
     try {
       const result = await createListingFn({ data: values })
       if (result.ok) {
-        await navigate({ to: '/dashboard/listings' })
+        await navigate({ to: '/dashboard/properties' })
         return
       }
       if (result.code === 'unauthenticated') {
@@ -53,7 +53,7 @@ function NewListingPage() {
         <h2 id="new-listing-heading" className="m-0 text-xl font-semibold text-[var(--sea-ink)]">
           Add a property listing
         </h2>
-        <Link to="/dashboard/listings" className="text-sm font-semibold">
+        <Link to="/dashboard/properties" className="text-sm font-semibold">
           Back to listings
         </Link>
       </div>

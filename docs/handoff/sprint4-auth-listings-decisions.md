@@ -25,7 +25,7 @@ Source: "Client story" in `docs/requirements/sponsor-auth-and-listings-brief.md`
 | Client need | Built? | Verified? | Where / evidence |
 | --- | --- | --- | --- |
 | **Secure sponsor login** (sign up, log in, sign out, protected dashboard) | Yes | **Partial.** Only the "signed-out visitor is redirected" check ran. Sign-up, login and sign-out are NOT RUN. | Pages `src/routes/auth/signup.tsx` and `src/routes/login.tsx` (Sprint 5 moved login from `/auth/login` to `/login`); session code `src/lib/auth/session.ts`; guard in `src/routes/dashboard.tsx`. Production build with no cookie: every `/dashboard` URL tested returned a redirect (HTTP 307) to `/login` [2.3, agent-run, re-run in Sprint 5]. Sign-up [2.1], login [2.2], sign-out [2.4]: NOT RUN. |
-| **Postgres-backed listings** (create and read, shown in the dashboard) | Yes | **Partial.** The code path was checked by reading it. No row has been created in a real database. | Server functions `src/server/listings.ts`; screens `src/routes/dashboard/listings/index.tsx` and `new.tsx`. The listings routes import only from the server module and contain no mock or fixture data [3.4, agent-run code check]. Create, show, reload and "row is in Postgres" [3.1 to 3.3]: NOT RUN. |
+| **Postgres-backed listings** (create and read, shown in the dashboard) | Yes | **Partial.** The code path was checked by reading it. No row has been created in a real database. | Server functions `src/server/listings.ts`; screens `src/routes/dashboard/properties.tsx` and `new.tsx`. The listings routes import only from the server module and contain no mock or fixture data [3.4, agent-run code check]. Create, show, reload and "row is in Postgres" [3.1 to 3.3]: NOT RUN. |
 | **RLS: a sponsor sees only their own rows** | Yes (in a migration file) | **No.** The migration has never been applied to a Supabase project in this checklist. The two-account test is NOT RUN. | `supabase/migrations/20250321000000_sponsors_properties_rls.sql`. File check only: RLS is enabled, four own-row policies exist for the `authenticated` role, access for `anon` is revoked, and there is no `using (true)` [1.3 file check, 1.4]. Live table and policy checks [1.1 to 1.3] and the User A / User B tests [4.1 to 4.4]: NOT RUN. |
 | **Secrets kept out of the client bundle** | Yes | **Yes for repo-level checks. The live browser check is NOT RUN.** | `.env.example` has placeholders only; no real `.env` was ever committed; the service-role name appears only in docs, `.env.example` and one comment; a test build with fake values left the server-only values out of the browser files [5.1 to 5.5a, all agent-run PASS]. Network-tab check with a real project [5.5b]: NOT RUN. |
 
@@ -75,7 +75,7 @@ These steps match `docs/setup/supabase-env-checklist.md` and Appendix A of the v
    ```
 
    The app is at `http://localhost:3000`. Restart `npm run dev` after any change to `.env.local`.
-5. **Walk through it.** Go to `/auth/signup` and create a test account (if your project requires email confirmation, confirm the email first). Log in at `/login`, open `/dashboard/listings`, click "Add listing", fill the required fields (title, summary, property type, street address, city, state or region, postal code), and submit. Reload the page: the listing should still be there. Check the row in the Supabase Table Editor.
+5. **Walk through it.** Go to `/auth/signup` and create a test account (if your project requires email confirmation, confirm the email first). Log in at `/login`, open `/dashboard/properties`, click "Add listing", fill the required fields (title, summary, property type, street address, city, state or region, postal code), and submit. Reload the page: the listing should still be there. Check the row in the Supabase Table Editor.
 6. **Run the User B test** (checklist section 4). Sign up a second account in a private window and confirm it sees "No properties yet." and not the first account's listing. This is the only real proof of RLS.
 7. **Checks that need no Supabase project:** `npm run typecheck` and `npm run build`. The repo has no test runner and no lint script.
 
@@ -87,7 +87,7 @@ These steps match `docs/setup/supabase-env-checklist.md` and Appendix A of the v
 
 - **"Signed in" is not "sponsor".** Any account that signs up can create listings. There is no sponsor role and no sign-up policy yet.
 - **Email confirmation** is a Supabase project setting. It has not been decided or recorded.
-- **No link to Listings in the sidebar.** Sponsors reach `/dashboard/listings` by URL. The navigation has four areas by an earlier decision, and adding a fifth needs a director decision.
+- **No link to Listings in the sidebar.** Sponsors reach `/dashboard/properties` by URL. The navigation has four areas by an earlier decision, and adding a fifth needs a director decision.
 - **The dashboard header still says "Mock data" and "Investor (demo)"** on live pages, not the signed-in user.
 - **Asking price displays in whole dollars,** although the column stores dollars and cents.
 - **Portfolio, Deals, Overview and Profile are still mock data** by design and are labelled "Mock data". Real listings are not shown to investors, because there is no cross-account read policy.
