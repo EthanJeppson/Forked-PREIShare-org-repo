@@ -4,7 +4,7 @@ import {
   getCookie,
   setCookie,
 } from '@tanstack/react-start/server'
-import { createServerSupabaseClient } from '../supabase/server'
+import { createServerSupabaseClient } from '../supabase.server'
 
 const ACCESS_TOKEN_COOKIE = 'sb-access-token'
 // Supabase access tokens last one hour by default. The token is checked with

@@ -5,9 +5,17 @@ import {
   redirect,
   useNavigate,
 } from '@tanstack/react-router'
+import { createClientOnlyFn } from '@tanstack/react-start'
 import { AppShell } from '../../components/dashboard/AppShell'
 import { getUser, signOut } from '../../lib/auth/session'
-import { createBrowserSupabaseClient } from '../../lib/supabase/client'
+import { createBrowserSupabaseClient } from '../../lib/supabase.client'
+
+// Start's import protection denies *.client.* files in the server build, and
+// this route file is also bundled for SSR. createClientOnlyFn strips the call
+// from the server bundle; sign-out only ever runs in the browser.
+const revokeBrowserSession = createClientOnlyFn(() =>
+  createBrowserSupabaseClient().auth.signOut({ scope: 'local' }),
+)
 
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: async () => {
@@ -26,7 +34,7 @@ function DashboardLayout() {
   async function handleSignOut() {
     setSigningOut(true)
     try {
-      await createBrowserSupabaseClient().auth.signOut({ scope: 'local' })
+      await revokeBrowserSession()
     } catch {
       // A failed revoke must not stop the cookie from being cleared below.
     }

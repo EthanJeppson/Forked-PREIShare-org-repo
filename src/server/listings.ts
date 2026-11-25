@@ -12,7 +12,7 @@ import type {
   ListingFieldErrors,
   UpdateListingFormInput,
 } from '../lib/listings/schema'
-import { createServerSupabaseClient } from '../lib/supabase/server'
+import { createServerSupabaseClient } from '../lib/supabase.server'
 import type {
   PropertyListing,
   PropertyListingChanges,
