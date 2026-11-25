@@ -1,6 +1,10 @@
--- Implements docs/data-model/property-listings-schema.md (design doc wins on any difference).
+-- Implements docs/data-model-and-rls-matrix.md (the matrix is the contract; it wins on any difference).
+-- Scaffold names map to repo names: properties -> property_listings, sponsor_id -> owner_id,
+-- description -> summary. There is no sponsors/profiles table: owner_id references auth.users.
 -- Review notes: docs/data-model/rls-policy-review.md
 -- Needs a Supabase project (the auth schema and auth.uid() must exist).
+-- Renamed in Sprint 5 from 20250321000000_property_listings.sql (same version prefix, same SQL).
+-- Do not re-run it on a database where property_listings already exists.
 
 begin;
 
@@ -96,3 +100,14 @@ create policy "property_listings_delete_own"
   using (owner_id = (select auth.uid()));
 
 commit;
+
+-- Review checklist against docs/data-model-and-rls-matrix.md (file review, not a live test):
+-- [x] RLS enabled on every table holding sponsor-owned data (property_listings is the only one).
+-- [x] No USING (true), no TO public policy, no service-role logic, no secrets.
+-- [x] SELECT  property_listings_select_own  USING owner_id = auth.uid()            (matrix SELECT row)
+-- [x] INSERT  property_listings_insert_own  WITH CHECK owner_id = auth.uid()       (matrix INSERT row)
+-- [x] UPDATE  property_listings_update_own  USING + WITH CHECK owner_id = auth.uid() (matrix UPDATE row)
+-- [x] DELETE  property_listings_delete_own  USING owner_id = auth.uid()            (matrix DELETE row)
+-- [x] anon: no grant and no policy (matrix anonymous row).
+-- [x] Columns, checks and the owner_id -> auth.users FK (on delete restrict) match the matrix table.
+-- [ ] Two-account test (Sponsor A cannot see or change Sponsor B's rows): NOT RUN.

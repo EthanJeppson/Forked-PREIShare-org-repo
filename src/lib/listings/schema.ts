@@ -2,7 +2,7 @@ import { z } from 'zod'
 import type { ListingStatus, PropertyType } from '../../types'
 
 // Mirrors the `property_listings` table in
-// supabase/migrations/20250321000000_property_listings.sql and
+// supabase/migrations/20250321000000_sponsors_properties_rls.sql and
 // docs/data-model/property-listings-schema.md. Change all three together.
 //
 // Not accepted from the browser, on purpose:

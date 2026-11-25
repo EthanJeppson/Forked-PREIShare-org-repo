@@ -4,7 +4,7 @@
 
 Design-only blueprint for sponsor auth and property listings: which tables exist, which column links a listing to its sponsor, and exactly who may do what. It contains no SQL. Any migration must follow this document; do not add tables or open policies without updating this file first.
 
-This matrix describes the schema **as it already exists** in `supabase/migrations/20250321000000_property_listings.sql` (shipped in Sprint 4). If this file and that migration ever disagree, stop and flag it to the director before changing either one.
+This matrix describes the schema **as it already exists** in `supabase/migrations/20250321000000_sponsors_properties_rls.sql` (shipped in Sprint 4 as `20250321000000_property_listings.sql`; renamed to the Sprint 5 lesson path with the same version prefix and the same SQL). If this file and that migration ever disagree, stop and flag it to the director before changing either one.
 
 Related: `docs/data-model/property-listings-schema.md` (longer Sprint 4 design, still labelled "design only" and still using the older policy names `listings_*_own`) and `docs/data-model/rls-policy-review.md` (review notes).
 
