@@ -2,15 +2,15 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { createClientOnlyFn } from '@tanstack/react-start'
-import { establishSession } from '../../lib/auth/session'
-import { createBrowserSupabaseClient } from '../../lib/supabase.client'
+import { establishSession } from '../lib/auth/session'
+import { createBrowserSupabaseClient } from '../lib/supabase.client'
 
 // Start's import protection denies *.client.* files in the server build, and
 // this route file is also bundled for SSR. createClientOnlyFn strips the call
 // from the server bundle; the form handler only ever runs in the browser.
 const getBrowserSupabase = createClientOnlyFn(() => createBrowserSupabaseClient())
 
-export const Route = createFileRoute('/auth/login')({
+export const Route = createFileRoute('/login')({
   component: LoginPage,
 })
 

@@ -30,7 +30,7 @@ function NewListingPage() {
         return
       }
       if (result.code === 'unauthenticated') {
-        await navigate({ to: '/auth/login' })
+        await navigate({ to: '/login' })
         return
       }
       setErrorMessage(
