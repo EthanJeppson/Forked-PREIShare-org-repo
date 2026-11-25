@@ -48,7 +48,7 @@ How this repo names things (so the stories below match the code):
 Each box is a pass/fail check. Boxes stay **unticked** here: this file states the rules, and results are recorded in the verification checklist, not by ticking boxes in this contract.
 
 - [ ] A sponsor can sign in with email and password and land on the protected `/dashboard`.
-- [ ] A signed-out visitor who opens `/dashboard`, `/dashboard/properties`, `/dashboard/listings/new` or any other `/dashboard` URL is redirected to `/login` and sees no dashboard content.
+- [ ] A signed-out visitor who opens `/dashboard`, `/dashboard/properties`, `/dashboard/properties/new` or any other `/dashboard` URL is redirected to `/login` and sees no dashboard content.
 - [ ] Signing out clears the session: after "Sign out", opening `/dashboard/properties` sends the visitor to `/login`.
 - [ ] After sign-in, `/dashboard/properties` shows only rows whose `owner_id` is the signed-in account. A second account (Sponsor B) never sees Sponsor A's rows, in the UI or when querying the database with Sponsor B's session.
 - [ ] Creating a property stores a row whose `owner_id` is the signed-in account. The browser form has no owner field, and a database insert with someone else's `owner_id` is rejected.

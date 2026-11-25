@@ -1,4 +1,10 @@
-import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  useChildMatches,
+  useRouter,
+} from '@tanstack/react-router'
 import type { ErrorComponentProps } from '@tanstack/react-router'
 import { ListingCard } from '../../components/listings/ListingCard'
 import { listMyListings } from '../../server/listings'
@@ -25,6 +31,11 @@ const alertClass =
 
 function ListingsIndexPage() {
   const result = Route.useLoaderData()
+  // properties.new.tsx is a child of this route, so /dashboard/properties/new
+  // renders here. Show the child (the create form) instead of the list.
+  const hasChild = useChildMatches({ select: (matches) => matches.length > 0 })
+
+  if (hasChild) return <Outlet />
 
   if (!result.ok) {
     return (
@@ -52,7 +63,7 @@ function ListingsIndexPage() {
         <h2 id="listings-heading" className="m-0 text-xl font-semibold text-[var(--sea-ink)]">
           Your property listings
         </h2>
-        <Link to="/dashboard/listings/new" className={actionLinkClass}>
+        <Link to="/dashboard/properties/new" className={actionLinkClass}>
           Add listing
         </Link>
       </div>
