@@ -1,12 +1,12 @@
 # RLS policy review: `property_listings`
 
-Review of `supabase/migrations/20250321000000_property_listings.sql` against [`property-listings-schema.md`](property-listings-schema.md) (the design doc wins on any difference) and the server-only boundary in [`../requirements/sponsor-auth-and-listings-brief.md`](../requirements/sponsor-auth-and-listings-brief.md).
+Review of `supabase/migrations/20250321000000_sponsors_properties_rls.sql` against [`property-listings-schema.md`](property-listings-schema.md) (the design doc wins on any difference) and the server-only boundary in [`../requirements/sponsor-auth-and-listings-brief.md`](../requirements/sponsor-auth-and-listings-brief.md).
 
 **Status:** the migration is written and was tested on a local Postgres 16 with stand-ins for Supabase. It has **not** been applied to a Supabase project. Applying it is a manual step (below).
 
 ## Migration file
 
-- Path: `supabase/migrations/20250321000000_property_listings.sql`
+- Path: `supabase/migrations/20250321000000_sponsors_properties_rls.sql`
 - Creates: the `public.property_listings` table, one index on `owner_id`, a `before update` trigger, row level security, the table grants, and four policies.
 - Everything is wrapped in one transaction (`begin` / `commit`). If any statement fails, nothing is created, so there is no half-applied table without RLS.
 - Contains no keys, no service-role usage and no application code.

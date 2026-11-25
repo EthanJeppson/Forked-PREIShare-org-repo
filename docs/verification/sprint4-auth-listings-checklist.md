@@ -26,7 +26,7 @@ Wording follows [`../setup/supabase-env-checklist.md`](../setup/supabase-env-che
 | 1.1 | `property_listings` exists in the Supabase project | NOT RUN | Run `select to_regclass('public.property_listings');` in the SQL Editor. Expect `property_listings`, not null. |
 | 1.2 | RLS is **enabled** on `property_listings` | NOT RUN | Run the first query in Appendix A, step 1. Expect `true`. |
 | 1.3 | The four policies exist and match `rls-policy-review.md` | NOT RUN | **Live check not done.** File check only (agent-run): the migration declares `property_listings_select_own`, `_insert_own`, `_update_own`, `_delete_own`, each `to authenticated`; no `using (true)` or `with check (true)` anywhere (0 matches). Live check: second query in Appendix A, step 1 should return the same four names. |
-| 1.4 | Migration file is in the repo: `supabase/migrations/20250321000000_property_listings.sql` | PASS | (agent-run) File exists on this branch. It enables RLS, revokes all table access from `public`, `anon` and `authenticated`, then grants only SELECT, INSERT, UPDATE and DELETE to `authenticated`. |
+| 1.4 | Migration file is in the repo: `supabase/migrations/20250321000000_sponsors_properties_rls.sql` | PASS | (agent-run) File exists on this branch. It enables RLS, revokes all table access from `public`, `anon` and `authenticated`, then grants only SELECT, INSERT, UPDATE and DELETE to `authenticated`. |
 
 ## 2. Authentication & session
 
@@ -132,7 +132,7 @@ The rows that could find real gaps (RLS on a live database, two-user isolation, 
    Expect only User B's rows. Then repeat with User A's id and expect only A's.
 7. **Network tab (5.5b).** DevTools, Network, filter by your Supabase host. Look at request headers without copying values anywhere.
 
-If any row fails, write a narrow fix prompt that names only the failing symptom and the file (for example "User B can read User A's listings: review the policies in `supabase/migrations/20250321000000_property_listings.sql` and the queries in `src/server/listings.ts`; do not weaken RLS"). Never paste a key into a prompt.
+If any row fails, write a narrow fix prompt that names only the failing symptom and the file (for example "User B can read User A's listings: review the policies in `supabase/migrations/20250321000000_sponsors_properties_rls.sql` and the queries in `src/server/listings.ts`; do not weaken RLS"). Never paste a key into a prompt.
 
 ## Appendix B: What the simulated runs do and do not prove
 

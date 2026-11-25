@@ -8,7 +8,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-// Mirrors supabase/migrations/20250321000000_property_listings.sql and
+// Mirrors supabase/migrations/20250321000000_sponsors_properties_rls.sql and
 // docs/data-model/property-listings-schema.md. Change all three together.
 type PropertyListingRow = {
   id: string
