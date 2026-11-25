@@ -1,9 +1,13 @@
 import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
 import type { ErrorComponentProps } from '@tanstack/react-router'
-import { ListingCard } from '../../../components/listings/ListingCard'
-import { listMyListings } from '../../../server/listings'
+import { ListingCard } from '../../components/listings/ListingCard'
+import { listMyListings } from '../../server/listings'
 
-export const Route = createFileRoute('/dashboard/listings/')({
+// The loader calls a server function (src/server/listings.ts) that queries with
+// the server client from src/lib/supabase.server.ts, acting as the signed-in
+// sponsor, so Postgres RLS decides which rows come back. This page only renders
+// them. The /dashboard layout guard sends signed-out visitors to /login first.
+export const Route = createFileRoute('/dashboard/properties')({
   loader: () => listMyListings(),
   // No cached copy: coming back after a create must not flash the old list.
   gcTime: 0,

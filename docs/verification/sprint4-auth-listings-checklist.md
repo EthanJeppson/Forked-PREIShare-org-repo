@@ -34,17 +34,17 @@ Wording follows [`../setup/supabase-env-checklist.md`](../setup/supabase-env-che
 |---|-------|--------|----------|
 | 2.1 | A sponsor can sign up with email and password (`src/routes/auth/signup.tsx`) | NOT RUN | Record User A's email here (never the password): ____________________. Note whether the project requires email confirmation (Authentication settings). If it does, signup shows "Account created. Check your email to confirm it, then log in." and you must confirm before 2.2. |
 | 2.2 | A sponsor can log in (`src/routes/login.tsx`, URL `/login`) and lands on the dashboard | NOT RUN | |
-| 2.3 | A signed-out visitor to any `/dashboard` URL is redirected to login | PASS | (agent-run, production build, no cookie, no Supabase variables set). `/dashboard`, `/dashboard/listings`, `/dashboard/listings/new`, `/dashboard/portfolio`, `/dashboard/deals`, `/dashboard/profile` each returned HTTP 307 to `/login`. `/dashboard/` returns 307 to `/dashboard`, which then redirects. `/`, `/about`, `/login`, `/auth/signup` returned 200; `/auth/login` now returns 404. Re-run in Sprint 5 after login moved from `/auth/login` to `/login` and the layout moved to `src/routes/dashboard.tsx`. Repeat in a browser: open `/dashboard/listings` while signed out and note the URL you end up on. |
-| 2.4 | Sign-out clears the session; protected pages stop loading | NOT RUN | Click "Sign out", then open `/dashboard/listings`. Expect the login page. Code path (agent-run read): `signOut()` in `src/lib/auth/session.ts` deletes the `sb-access-token` cookie. |
+| 2.3 | A signed-out visitor to any `/dashboard` URL is redirected to login | PASS | (agent-run, production build, no cookie, no Supabase variables set). `/dashboard`, `/dashboard/properties`, `/dashboard/listings/new`, `/dashboard/portfolio`, `/dashboard/deals`, `/dashboard/profile` each returned HTTP 307 to `/login`. `/dashboard/` returns 307 to `/dashboard`, which then redirects. `/`, `/about`, `/login`, `/auth/signup` returned 200; `/auth/login` now returns 404. Re-run in Sprint 5 after login moved from `/auth/login` to `/login` and the layout moved to `src/routes/dashboard.tsx`; re-run again after the list moved from `/dashboard/listings` to `/dashboard/properties`. Repeat in a browser: open `/dashboard/properties` while signed out and note the URL you end up on. |
+| 2.4 | Sign-out clears the session; protected pages stop loading | NOT RUN | Click "Sign out", then open `/dashboard/properties`. Expect the login page. Code path (agent-run read): `signOut()` in `src/lib/auth/session.ts` deletes the `sb-access-token` cookie. |
 
 ## 3. Listings happy path (User A)
 
 | # | Check | Result | Evidence |
 |---|-------|--------|----------|
 | 3.1 | Creating a listing through the form succeeds | NOT RUN | Listing title used: ____________________. Fill every required field: title, summary, property type, street address, city, state or region, postal code. |
-| 3.2 | The new row shows on `/dashboard/listings` (`src/routes/dashboard/listings/index.tsx`) with the values you typed | NOT RUN | Also reload the page and confirm the row is still there. |
+| 3.2 | The new row shows on `/dashboard/properties` (`src/routes/dashboard/properties.tsx`) with the values you typed | NOT RUN | Also reload the page and confirm the row is still there. |
 | 3.3 | The row exists in Postgres (Table Editor), not in a client array | NOT RUN | In the Table Editor open `property_listings`: one row, `owner_id` equals User A's id (Authentication, Users), not User B's. |
-| 3.4 | Create and read go through `src/server/listings.ts` | PASS | (agent-run, code check) `src/routes/dashboard/listings/index.tsx` imports only `listMyListings` and `new.tsx` imports only `createListing`, both from `src/server/listings.ts`. The word "supabase" does not appear in either route or in `ListingForm.tsx`. `ListingCard.tsx` has a type-only import from `src/lib/supabase/types` (erased at build). No `mock` or `fixtures` reference in the listings routes, components, server module or schema. Runtime confirmation (a `_serverFn` request in the Network tab on create) is still to do with a real project. |
+| 3.4 | Create and read go through `src/server/listings.ts` | PASS | (agent-run, code check) `src/routes/dashboard/properties.tsx` imports only `listMyListings` and `new.tsx` imports only `createListing`, both from `src/server/listings.ts`. The word "supabase" does not appear in either route or in `ListingForm.tsx`. `ListingCard.tsx` has a type-only import from `src/lib/supabase/types` (erased at build). No `mock` or `fixtures` reference in the listings routes, components, server module or schema. Runtime confirmation (a `_serverFn` request in the Network tab on create) is still to do with a real project. |
 
 ## 4. Row Level Security (User B)
 
@@ -53,7 +53,7 @@ Do not skip this section. It is the only proof that one sponsor cannot read anot
 | # | Check | Result | Evidence |
 |---|-------|--------|----------|
 | 4.1 | A second, different account (User B) can sign up and log in, in a private window | NOT RUN | User B's email: ____________________ |
-| 4.2 | User B's `/dashboard/listings` does **not** show User A's listing | NOT RUN | Expect the empty state, "No properties yet." |
+| 4.2 | User B's `/dashboard/properties` does **not** show User A's listing | NOT RUN | Expect the empty state, "No properties yet." |
 | 4.3 | A direct read as User B also returns no foreign rows | NOT RUN | Appendix A, step 6 (SQL Editor, impersonating User B). Expect 0 rows. |
 | 4.4 | User B can create a listing and sees only their own; User A still sees only A's | NOT RUN | Switch back to the first window and reload: only A's rows. |
 
@@ -82,7 +82,7 @@ The rows that could find real gaps (RLS on a live database, two-user isolation, 
 
 - **"Signed in" is not "sponsor".** Every authenticated user can create listings (`rls-policy-review.md`, risk 1). Needs a sign-up policy decision.
 - **Email confirmation** is a project setting. Decide on or off and record it in 2.1.
-- **No sidebar link to Listings.** Sponsors reach `/dashboard/listings` by URL. `nav-config.ts` has four areas by decision D1.
+- **No sidebar link to Listings.** Sponsors reach `/dashboard/properties` by URL. `nav-config.ts` has four areas by decision D1.
 - **The dashboard Header still says "Mock data" and "Investor (demo)"** on live pages.
 - **Asking price display** rounds to whole dollars (`formatCurrency`), although the column stores cents.
 - **The Deals, Portfolio, Overview and Profile pages are still mock data** by design.
@@ -117,8 +117,8 @@ The rows that could find real gaps (RLS on a live database, two-user isolation, 
    Expect `true`; four rows, role `authenticated` on each; and grants only to `authenticated` (nothing for `anon`).
 2. **Local env.** `cp .env.example .env.local` and paste your own values in by hand (names only are in `.env.example`). `SUPABASE_SERVICE_ROLE_KEY` is not read by any code yet and can stay unset. Run `npm run dev`.
 3. **User A (2.1, 2.2, 2.4).** In a normal window go to `/auth/signup`, create User A, then sign out, then log in at `/login`. Confirm you land on `/dashboard`.
-4. **Create and list (3.1 to 3.3).** Open `/dashboard/listings`, expect the empty state. Click "Add listing", fill the required fields, submit. Confirm you return to the list and the row shows. Reload. Open the Table Editor and check the row and its `owner_id`.
-5. **User B (4.1, 4.2, 4.4).** In a private window sign up as a different email. Open `/dashboard/listings`. Expect "No properties yet." Create one listing as B. Switch back to window 1 and reload: only A's rows.
+4. **Create and list (3.1 to 3.3).** Open `/dashboard/properties`, expect the empty state. Click "Add listing", fill the required fields, submit. Confirm you return to the list and the row shows. Reload. Open the Table Editor and check the row and its `owner_id`.
+5. **User B (4.1, 4.2, 4.4).** In a private window sign up as a different email. Open `/dashboard/properties`. Expect "No properties yet." Create one listing as B. Switch back to window 1 and reload: only A's rows.
 6. **Direct read as B (4.3).** In the SQL Editor, replace the placeholder with User B's id from Authentication, Users, then run:
 
    ```sql
@@ -168,5 +168,5 @@ grep -rlF fake-server-secret .output/public    # expect no output
 grep -rli service_role .output/public          # expect no output
 
 # 2.3  (after: node .output/server/index.mjs)
-curl -s -o /dev/null -w '%{http_code} %{redirect_url}\n' http://127.0.0.1:3000/dashboard/listings
+curl -s -o /dev/null -w '%{http_code} %{redirect_url}\n' http://127.0.0.1:3000/dashboard/properties
 ```

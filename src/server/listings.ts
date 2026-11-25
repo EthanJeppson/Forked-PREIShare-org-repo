@@ -34,8 +34,28 @@ export type ListingErrorCode =
   | 'not_found'
   | 'database'
 
+// The list page reads only what a listing card shows (docs/data-model-and-rls-matrix.md).
+const LIST_COLUMNS =
+  'id, title, summary, property_type, status, address_line1, address_line2, city, region, postal_code, asking_price, created_at'
+
+export type ListingSummary = Pick<
+  PropertyListing,
+  | 'id'
+  | 'title'
+  | 'summary'
+  | 'property_type'
+  | 'status'
+  | 'address_line1'
+  | 'address_line2'
+  | 'city'
+  | 'region'
+  | 'postal_code'
+  | 'asking_price'
+  | 'created_at'
+>
+
 export type ListingsResult =
-  | { ok: true; listings: PropertyListing[] }
+  | { ok: true; listings: ListingSummary[] }
   | { ok: false; code: ListingErrorCode; error: string }
 
 export type ListingMutationResult =
@@ -97,7 +117,7 @@ export const listMyListings = createServerFn({ method: 'GET' }).handler(
 
     const { data, error } = await createServerSupabaseClient(accessToken)
       .from('property_listings')
-      .select('*')
+      .select(LIST_COLUMNS)
       .eq('owner_id', user.id)
       .order('created_at', { ascending: false })
 
