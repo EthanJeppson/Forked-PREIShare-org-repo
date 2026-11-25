@@ -32,7 +32,7 @@ These four are the only destinations. There is no activity page. Both Sidebar an
 | Mobile nav | Slide-over or drawer navigation on small screens | `MobileNav` |
 | Main | Scrollable area where the active page's content appears | The route's `<Outlet />`, filled by page widgets |
 
-`AppShell` is the frame. It places Header, Sidebar, MobileNav, and the main region together, and it is rendered by the layout route `src/routes/dashboard/route.tsx`.
+`AppShell` is the frame. It places Header, Sidebar, MobileNav, and the main region together, and it is rendered by the layout route `src/routes/dashboard.tsx`.
 
 Region picture in words:
 
@@ -44,7 +44,7 @@ Region picture in words:
 ### AppShell
 
 - **Responsibility:** Arrange the dashboard frame and own the state of whether MobileNav is open. Pick the page title for the current URL from `navConfig`.
-- **Parent:** The dashboard layout route (`src/routes/dashboard/route.tsx`).
+- **Parent:** The dashboard layout route (`src/routes/dashboard.tsx`).
 - **Children:** Header, Sidebar, MobileNav, and the main content slot.
 - **Props (beginner):**
   - `children`: the page content to show in main.

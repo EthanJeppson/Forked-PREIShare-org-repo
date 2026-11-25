@@ -33,8 +33,8 @@ Wording follows [`../setup/supabase-env-checklist.md`](../setup/supabase-env-che
 | # | Check | Result | Evidence |
 |---|-------|--------|----------|
 | 2.1 | A sponsor can sign up with email and password (`src/routes/auth/signup.tsx`) | NOT RUN | Record User A's email here (never the password): ____________________. Note whether the project requires email confirmation (Authentication settings). If it does, signup shows "Account created. Check your email to confirm it, then log in." and you must confirm before 2.2. |
-| 2.2 | A sponsor can log in (`src/routes/auth/login.tsx`) and lands on the dashboard | NOT RUN | |
-| 2.3 | A signed-out visitor to any `/dashboard` URL is redirected to login | PASS | (agent-run, production build, no cookie, no Supabase variables set). `/dashboard`, `/dashboard/listings`, `/dashboard/listings/new`, `/dashboard/portfolio`, `/dashboard/deals`, `/dashboard/profile` each returned HTTP 307 to `/auth/login`. `/dashboard/` returns 307 to `/dashboard`, which then redirects. `/`, `/about`, `/auth/login`, `/auth/signup` returned 200. Repeat in a browser: open `/dashboard/listings` while signed out and note the URL you end up on. |
+| 2.2 | A sponsor can log in (`src/routes/login.tsx`, URL `/login`) and lands on the dashboard | NOT RUN | |
+| 2.3 | A signed-out visitor to any `/dashboard` URL is redirected to login | PASS | (agent-run, production build, no cookie, no Supabase variables set). `/dashboard`, `/dashboard/listings`, `/dashboard/listings/new`, `/dashboard/portfolio`, `/dashboard/deals`, `/dashboard/profile` each returned HTTP 307 to `/login`. `/dashboard/` returns 307 to `/dashboard`, which then redirects. `/`, `/about`, `/login`, `/auth/signup` returned 200; `/auth/login` now returns 404. Re-run in Sprint 5 after login moved from `/auth/login` to `/login` and the layout moved to `src/routes/dashboard.tsx`. Repeat in a browser: open `/dashboard/listings` while signed out and note the URL you end up on. |
 | 2.4 | Sign-out clears the session; protected pages stop loading | NOT RUN | Click "Sign out", then open `/dashboard/listings`. Expect the login page. Code path (agent-run read): `signOut()` in `src/lib/auth/session.ts` deletes the `sb-access-token` cookie. |
 
 ## 3. Listings happy path (User A)
@@ -116,7 +116,7 @@ The rows that could find real gaps (RLS on a live database, two-user isolation, 
 
    Expect `true`; four rows, role `authenticated` on each; and grants only to `authenticated` (nothing for `anon`).
 2. **Local env.** `cp .env.example .env.local` and paste your own values in by hand (names only are in `.env.example`). `SUPABASE_SERVICE_ROLE_KEY` is not read by any code yet and can stay unset. Run `npm run dev`.
-3. **User A (2.1, 2.2, 2.4).** In a normal window go to `/auth/signup`, create User A, then sign out, then log in at `/auth/login`. Confirm you land on `/dashboard`.
+3. **User A (2.1, 2.2, 2.4).** In a normal window go to `/auth/signup`, create User A, then sign out, then log in at `/login`. Confirm you land on `/dashboard`.
 4. **Create and list (3.1 to 3.3).** Open `/dashboard/listings`, expect the empty state. Click "Add listing", fill the required fields, submit. Confirm you return to the list and the row shows. Reload. Open the Table Editor and check the row and its `owner_id`.
 5. **User B (4.1, 4.2, 4.4).** In a private window sign up as a different email. Open `/dashboard/listings`. Expect "No properties yet." Create one listing as B. Switch back to window 1 and reload: only A's rows.
 6. **Direct read as B (4.3).** In the SQL Editor, replace the placeholder with User B's id from Authentication, Users, then run:

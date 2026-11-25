@@ -6,9 +6,9 @@ import {
   useNavigate,
 } from '@tanstack/react-router'
 import { createClientOnlyFn } from '@tanstack/react-start'
-import { AppShell } from '../../components/dashboard/AppShell'
-import { getUser, signOut } from '../../lib/auth/session'
-import { createBrowserSupabaseClient } from '../../lib/supabase.client'
+import { AppShell } from '../components/dashboard/AppShell'
+import { getUser, signOut } from '../lib/auth/session'
+import { createBrowserSupabaseClient } from '../lib/supabase.client'
 
 // Start's import protection denies *.client.* files in the server build, and
 // this route file is also bundled for SSR. createClientOnlyFn strips the call
@@ -20,7 +20,7 @@ const revokeBrowserSession = createClientOnlyFn(() =>
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: async () => {
     const user = await getUser()
-    if (!user) throw redirect({ to: '/auth/login' })
+    if (!user) throw redirect({ to: '/login' })
     return { user }
   },
   component: DashboardLayout,
@@ -40,7 +40,7 @@ function DashboardLayout() {
     }
     try {
       await signOut()
-      await navigate({ to: '/auth/login' })
+      await navigate({ to: '/login' })
     } finally {
       setSigningOut(false)
     }

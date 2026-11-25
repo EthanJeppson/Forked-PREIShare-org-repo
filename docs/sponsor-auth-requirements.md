@@ -17,13 +17,13 @@ How this repo names things (so the stories below match the code):
 - A "property" in this document is a row in `public.property_listings`.
 - The owning account is the column `owner_id`, a link to the Supabase account (`auth.users`). There is no separate `sponsors` table.
 - Sign-in is email and password through Supabase Auth. The server keeps the session token in an httpOnly cookie named `sb-access-token`.
-- The route `/dashboard` and every page under it are protected by one session check in `src/routes/dashboard/route.tsx`.
+- The route `/dashboard` and every page under it are protected by one session check in `src/routes/dashboard.tsx`.
 
 ## 2. Actors
 
 | Actor | Description | Signed in? |
 | --- | --- | --- |
-| Anonymous visitor | Anyone not logged in. Can open the public pages (`/`, `/about`) and the sign-in and sign-up pages (`/auth/login`, `/auth/signup`). | No |
+| Anonymous visitor | Anyone not logged in. Can open the public pages (`/`, `/about`) and the sign-in and sign-up pages (`/login`, `/auth/signup`). | No |
 | Sponsor | A partner who owns and manages their own listings. In the current code a sponsor is any signed-in account; there is no separate sponsor role yet (see Open questions). | Yes |
 | Admin | Internal operator who could review or moderate listings. **Out of scope** for this topic. Not built. | N/A this sprint topic |
 
@@ -48,8 +48,8 @@ How this repo names things (so the stories below match the code):
 Each box is a pass/fail check. Boxes stay **unticked** here: this file states the rules, and results are recorded in the verification checklist, not by ticking boxes in this contract.
 
 - [ ] A sponsor can sign in with email and password and land on the protected `/dashboard`.
-- [ ] A signed-out visitor who opens `/dashboard`, `/dashboard/listings`, `/dashboard/listings/new` or any other `/dashboard` URL is redirected to `/auth/login` and sees no dashboard content.
-- [ ] Signing out clears the session: after "Sign out", opening `/dashboard/listings` sends the visitor to `/auth/login`.
+- [ ] A signed-out visitor who opens `/dashboard`, `/dashboard/listings`, `/dashboard/listings/new` or any other `/dashboard` URL is redirected to `/login` and sees no dashboard content.
+- [ ] Signing out clears the session: after "Sign out", opening `/dashboard/listings` sends the visitor to `/login`.
 - [ ] After sign-in, `/dashboard/listings` shows only rows whose `owner_id` is the signed-in account. A second account (Sponsor B) never sees Sponsor A's rows, in the UI or when querying the database with Sponsor B's session.
 - [ ] Creating a property stores a row whose `owner_id` is the signed-in account. The browser form has no owner field, and a database insert with someone else's `owner_id` is rejected.
 - [ ] The browser bundle and the browser's network requests contain only the public Supabase URL and the anon (publishable) key. No service-role key, database password or connection string appears.

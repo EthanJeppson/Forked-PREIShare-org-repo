@@ -92,7 +92,7 @@ Scope note: the brief puts editing and deleting out of scope for Sprint 4 (creat
 | Operation | Runs where | Client / key | Notes |
 | --- | --- | --- | --- |
 | Sign up, sign in, sign out | Supabase Auth, started from the app | Public client: `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`. No service-role. | Anon key is public by design. Sign-up policy is open (brief, question 4). |
-| Check the session before a protected page | Server (route guard on `src/routes/dashboard/route.tsx`, via `createServerFn` or `beforeLoad`) | Server client acting as the user | No session means redirect to sign-in. |
+| Check the session before a protected page | Server (route guard on `src/routes/dashboard.tsx`, via `createServerFn` or `beforeLoad`) | Server client acting as the user | No session means redirect to sign-in. |
 | List my listings | Server loader | Server client acting as the user (`SUPABASE_URL` + the user's session). RLS applies. | Result is passed to prop-driven widgets as props. |
 | Create listing | Server function | Server client acting as the user. `owner_id` comes from the verified session. | Validate every field on the server. RLS is the second line of defence. |
 | Update or archive listing | Server function (if enabled) | Server client acting as the user | RLS blocks cross-owner edits. |

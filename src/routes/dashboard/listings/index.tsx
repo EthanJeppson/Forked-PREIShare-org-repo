@@ -32,7 +32,7 @@ function ListingsIndexPage() {
           {result.error}
         </p>
         {result.code === 'unauthenticated' ? (
-          <Link to="/auth/login" className={`${actionLinkClass} justify-self-start`}>
+          <Link to="/login" className={`${actionLinkClass} justify-self-start`}>
             Log in
           </Link>
         ) : null}
