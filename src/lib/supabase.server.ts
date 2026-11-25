@@ -1,17 +1,23 @@
 import { createServerOnlyFn } from '@tanstack/react-start'
 import { createClient } from '@supabase/supabase-js'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import type { Database } from './types'
+import type { Database } from './supabase/types'
 
 /**
  * SERVER ONLY. Import this from server functions, loaders' server code and
  * other server utilities, never from React components or browser code.
- * `createServerOnlyFn` makes the call throw if it ever runs in the browser.
+ * `createServerOnlyFn` makes the call throw if it ever runs in the browser, and
+ * the `.server.ts` name turns on TanStack Start import protection, so the client
+ * build fails if browser code reaches this file.
  *
  * Returns a client that acts as the signed-in user: it sends the user's access
  * token, so Row Level Security applies to every query. It does not read
  * `SUPABASE_SERVICE_ROLE_KEY` and no sponsor operation should (see
  * docs/data-model/property-listings-schema.md, section 5).
+ *
+ * There is deliberately no service-role helper in this file. That key bypasses
+ * RLS and no sponsor feature needs it (docs/env-var-checklist.md); adding one
+ * is a director decision.
  *
  * Reads `SUPABASE_URL` (server-only) and `VITE_SUPABASE_ANON_KEY` (public)
  * from `.env.example`. It creates a fresh client per call and persists no

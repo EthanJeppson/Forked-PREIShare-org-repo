@@ -39,8 +39,8 @@ Source: "Client story" in `docs/requirements/sponsor-auth-and-listings-brief.md`
 - **Data:** one table, `public.property_listings`, one row per listing, each owned by one account (`owner_id`, a foreign key to `auth.users`). Columns and rules are in `docs/data-model/property-listings-schema.md`. Status values are `draft`, `active`, `under_contract`, `closed`; `asking_price` is optional; `closed_at` is set only for closed listings.
 - **Authorization:** RLS is enabled, and the table grants go only to the `authenticated` role (nothing for `anon`). There are four own-row policies (select, insert, update, delete) that compare `owner_id` with the caller's id. A database trigger blocks changing `id`, `owner_id` or `created_at`. No policy lets one account read another's rows.
 - **Server vs browser clients:**
-  - `src/lib/supabase/client.ts` runs in the browser. It uses only the public project URL and the anon key.
-  - `src/lib/supabase/server.ts` is server-only. It acts as the signed-in user, so RLS applies. It reads `SUPABASE_URL` inside the function, not at module scope.
+  - `src/lib/supabase.client.ts` runs in the browser. It uses only the public project URL and the anon key.
+  - `src/lib/supabase.server.ts` is server-only. It acts as the signed-in user, so RLS applies. It reads `SUPABASE_URL` inside the function, not at module scope.
   - **The service-role key (`SUPABASE_SERVICE_ROLE_KEY`) bypasses RLS and must never reach the browser. No code reads it.** If a later task needs it, it must be read with `process.env` on the server only, with a written reason.
 - **Owner comes from the session, not the form.** `src/server/listings.ts` ignores any `owner_id`, `id` or `closed_at` sent by the browser, and the database also rejects an insert whose owner is not the caller. Inputs are validated on the server with Zod (`src/lib/listings/schema.ts`).
 - **Env hygiene:**

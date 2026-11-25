@@ -12,9 +12,9 @@ In Vite, only names that start with `VITE_` are copied into the browser bundle. 
 
 | Name | Client-safe or server-only | Used for | Why |
 | --- | --- | --- | --- |
-| `VITE_SUPABASE_URL` | **Client-safe** (browser and server) | Auth session: the browser client (`src/lib/supabase/client.ts`) uses it to sign users in. | The project URL is public by design. |
-| `VITE_SUPABASE_ANON_KEY` | **Client-safe** (browser and server) | Auth session: sign-in in the browser, and server queries made as the signed-in user (`src/lib/supabase/server.ts`). | The anon (publishable) key is public by design. It is not a bypass: Row Level Security (RLS) decides what each user can read or write. |
-| `SUPABASE_URL` | **Server-only** | Auth session: server code that reads the URL without the `VITE_` prefix (`src/lib/supabase/server.ts`). | Not a secret, but there is no reason to ship a second copy to the browser. |
+| `VITE_SUPABASE_URL` | **Client-safe** (browser and server) | Auth session: the browser client (`src/lib/supabase.client.ts`) uses it to sign users in. | The project URL is public by design. |
+| `VITE_SUPABASE_ANON_KEY` | **Client-safe** (browser and server) | Auth session: sign-in in the browser, and server queries made as the signed-in user (`src/lib/supabase.server.ts`). | The anon (publishable) key is public by design. It is not a bypass: Row Level Security (RLS) decides what each user can read or write. |
+| `SUPABASE_URL` | **Server-only** | Auth session: server code that reads the URL without the `VITE_` prefix (`src/lib/supabase.server.ts`). | Not a secret, but there is no reason to ship a second copy to the browser. |
 | `SUPABASE_SERVICE_ROLE_KEY` | **Server-only. Secret.** | Admin bypass of RLS. **No code reads it today.** | It bypasses RLS, so anyone who holds it can read and change every row. |
 
 ### Never do this: `SUPABASE_SERVICE_ROLE_KEY`
