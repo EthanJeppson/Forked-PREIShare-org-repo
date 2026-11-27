@@ -1,5 +1,10 @@
 import { useState } from 'react'
-import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
+import {
+  Link,
+  createFileRoute,
+  useNavigate,
+  useRouter,
+} from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { ListingForm } from '../../components/listings/ListingForm'
 import type {
@@ -19,6 +24,7 @@ export const Route = createFileRoute('/dashboard/properties/new')({
 
 function NewListingPage() {
   const navigate = useNavigate()
+  const router = useRouter()
   const createListingFn = useServerFn(createListing)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -31,6 +37,9 @@ function NewListingPage() {
     try {
       const result = await createListingFn({ data: values })
       if (result.ok) {
+        // The list route stays mounted as this page's parent, so its loader
+        // result is from before the insert. Invalidate so the list refetches.
+        await router.invalidate()
         await navigate({ to: '/dashboard/properties' })
         return
       }
