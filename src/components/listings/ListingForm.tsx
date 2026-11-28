@@ -33,8 +33,10 @@ const FIELD_NAMES = [
   'asking_price',
 ] as const satisfies ReadonlyArray<keyof ListingFormValues>
 
+// aria-invalid is set by Field when the server returns an error for this input,
+// so the same attribute drives both screen readers and the red outline.
 const inputClass =
-  'h-11 w-full rounded-lg border border-[var(--line)] bg-[var(--surface-strong)] px-3 text-base font-normal text-[var(--sea-ink)]'
+  'h-11 w-full rounded-lg border border-[var(--line)] bg-[var(--surface-strong)] px-3 text-base font-normal text-[var(--sea-ink)] aria-invalid:border-2 aria-invalid:border-[rgb(214,84,84)]'
 
 type FieldProps = {
   name: (typeof FIELD_NAMES)[number]
@@ -79,7 +81,7 @@ function Field({ name, label, required, hint, error, children }: FieldProps) {
         </p>
       ) : null}
       {error ? (
-        <p id={`${id}-error`} className="m-0 text-sm font-semibold text-[var(--sea-ink)]">
+        <p id={`${id}-error`} className="m-0 text-sm font-semibold text-[rgb(214,84,84)]">
           {error}
         </p>
       ) : null}

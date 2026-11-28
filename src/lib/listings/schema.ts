@@ -136,7 +136,8 @@ export function normalizeListingInput(raw: unknown): unknown {
   if (isBlankString(source.asking_price)) {
     source.asking_price = null
   } else if (typeof source.asking_price === 'string') {
-    source.asking_price = Number(source.asking_price.trim())
+    // Accept how people type US dollars: "$1,000,000" and "1,000,000" mean 1000000.
+    source.asking_price = Number(source.asking_price.replace(/[$,\s]/g, ''))
   }
   return source
 }
